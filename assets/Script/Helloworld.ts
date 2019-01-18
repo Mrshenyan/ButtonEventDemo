@@ -5,6 +5,7 @@ export default class Helloworld extends cc.Component {
 
     @property(cc.Label)
     Str: cc.Label = null;
+
     @property(cc.Button)
     Btn1:cc.Button = null;
     @property(cc.Button)
@@ -17,12 +18,29 @@ export default class Helloworld extends cc.Component {
     Sp2:cc.Sprite = null;
     @property(cc.Sprite)
     Sp3:cc.Sprite = null;
+    @property(cc.Sprite)
+    Bg:cc.Sprite = null;
+
+    @property(cc.Button)
+    Btn_Net:cc.Button=null;
+    @property(cc.Label)
+    NetWorkMsg:cc.Label=null;
 
 
 
+    StartPos:cc.Vec2;
+    EndPos:cc.Vec2;
+    descPos:cc.Vec2;
+
+    MainNodePos:cc.Vec2;
 
     onLoad(){
-
+        this.MainNodePos = this.node.position;
+        this.descPos = cc.Vec2.ZERO;
+        this.StartPos = cc.Vec2.ZERO;
+        this.EndPos = cc.Vec2.ZERO;
+        let self = this;
+        console.log("看看："+this.node.position);
         let Btn_CallBackEvent = new cc.Component.EventHandler();
         // console.log(Btn_CallBackEvent);
         Btn_CallBackEvent.target = this.node;
@@ -31,7 +49,13 @@ export default class Helloworld extends cc.Component {
         let BtnCallBE:cc.Button = this.Btn1;
         // console.log(Btn_CallBackEvent);
         BtnCallBE.clickEvents.push(Btn_CallBackEvent);
+        // this.node.on(cc.Node.EventType.TOUCH_START,this.TouchEvent,this);
+        // this.node.on(cc.Node.EventType.TOUCH_MOVE,this.TouchEventMove,this);
         
+        this.Bg.node.on(cc.Node.EventType.TOUCH_START,this.BgCallBackEventStart,this.node);
+        this.Bg.node.on(cc.Node.EventType.TOUCH_MOVE,this.BgCallBackEventMove,self);
+        this.Bg.node.on(cc.Node.EventType.TOUCH_END,this.BgCallBackEventEnd,self);
+        // this.Bg.node.on(cc.Node.EventType.TOUCH_CANCEL,this.BgCallBackEventMove,this.Bg);
     }
 
     start () {
@@ -51,6 +75,12 @@ export default class Helloworld extends cc.Component {
 
 
     
+    TouchEvent(){
+    }
+    TouchEventMove(event){
+        console.log(event);
+    }
+
     Btn_CallBackEvent1(event){
         let self = this;
         let btn = event.target;
@@ -93,14 +123,59 @@ export default class Helloworld extends cc.Component {
         console.log(parent);
         console.log("i am the 3");
     }
+    BgCallBackEventMove(event){
+        let tarStaPos=new cc.Vec2();//target的坐标
+        let tarWorldPos = new cc.Vec2();//target的世界坐标
+        let tarPos = new cc.Vec2();
+        let WinSize = new cc.Vec2();
+        let touchPos = event.touch._point;
+        let x:cc.Vec2 = cc.Vec2.ZERO;
+        this.getComponent("Helloworld").EndPos.y = touchPos.y;
+        this.getComponent("Helloworld").EndPos.x = touchPos.x;
+        x.x = this.getComponent("Helloworld").EndPos.x - this.getComponent("Helloworld").StartPos.x;
+        x.y = this.getComponent("Helloworld").EndPos.y - this.getComponent("Helloworld").StartPos.y;
+        event.target.x += x.x;
+        event.target.y += x.y;
+        console.log("我是Move时候的descpos："+this.getComponent("Helloworld").descPos+"   我是Move时候的touchPos: "+touchPos)
+        this.getComponent("Helloworld").StartPos.x =this.getComponent("Helloworld").EndPos.x;
+        this.getComponent("Helloworld").StartPos.y =this.getComponent("Helloworld").EndPos.y;
+
+    }
+    BgCallBackEventStart(event){
+        let tarStaPos=new cc.Vec2();//target的坐标
+        let tarWorldPos = new cc.Vec2();//target的世界坐标
+        let tarPos = new cc.Vec2();
+        let WinSize = new cc.Vec2();
+        let touchPos = event.touch._point;
+        tarStaPos.x = event.target.x;
+        tarStaPos.y = event.target.y;
+        console.log("看看（target的坐标）tarStaPos: "+tarStaPos);
+        tarWorldPos = event.target.convertToWorldSpaceAR(cc.Vec2.ZERO);
+        console.log("看看（target的世界坐标）tarWorldPos: "+tarWorldPos);
+        this.getComponent("Helloworld").descPos.x = tarWorldPos.x - touchPos.x;
+        this.getComponent("Helloworld").descPos.y = tarWorldPos.y - touchPos.y;
+        console.log("看看（触摸点的坐标）touchPos: "+touchPos);
+        console.log("看看（坐标差距）this.descPos: "+this.getComponent("Helloworld").descPos);
+
+        this.getComponent("Helloworld").StartPos.x = touchPos.x;
+        this.getComponent("Helloworld").StartPos.y = touchPos.y;
+
+
+        
+    }
+    BgCallBackEventEnd(event){
+        this.EndPos = event.touch._point;
+        // console.log("EndPos: ");
+        // console.log(this);
+    }
     SpCallBackEventMove1(event){
         let pos = event.touch._point;
         // pos = event.target.convertToWorldSpaceAR(pos);
         let parentSize =new cc.Vec2
         parentSize.x = event.target.parent.width;
         parentSize.y = event.target.parent.height;
-        event.target.x = pos.x-parentSize.x/2;
-        event.target.y = pos.y-parentSize.y/2;
+        event.target.x = pos.x//-parentSize.x/2;
+        event.target.y = pos.y//-parentSize.y/2;
         // console.log(parentSize);
         // console.log(event.target);
         // console.log(event.target.parent);
@@ -158,5 +233,23 @@ export default class Helloworld extends cc.Component {
         console.log(event.target);
         console.log(parent);
         console.log("plase call me Sp3");
+    }
+
+    LinkNet(){
+        let self = this;
+        let url = "https://httpbin.org/get?show_env=1"
+        let xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = ()=>{
+            if(xhr.readyState == 4 && (xhr.status>= 200 && xhr.status<400)){
+                let response = xhr.responseText;
+                console.log(response);
+                let cc = JSON.parse(response);
+                console.log(cc);
+                console.log(cc.args);
+            }
+        }
+        xhr.open("GET",url,true);
+        xhr.send();
+        self.NetWorkMsg.string = "联网开始";
     }
 }
