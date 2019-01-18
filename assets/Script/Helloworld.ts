@@ -30,13 +30,11 @@ export default class Helloworld extends cc.Component {
 
     StartPos:cc.Vec2;
     EndPos:cc.Vec2;
-    descPos:cc.Vec2;
 
     MainNodePos:cc.Vec2;
 
     onLoad(){
         this.MainNodePos = this.node.position;
-        this.descPos = cc.Vec2.ZERO;
         this.StartPos = cc.Vec2.ZERO;
         this.EndPos = cc.Vec2.ZERO;
         let self = this;
@@ -124,10 +122,6 @@ export default class Helloworld extends cc.Component {
         console.log("i am the 3");
     }
     BgCallBackEventMove(event){
-        let tarStaPos=new cc.Vec2();//target的坐标
-        let tarWorldPos = new cc.Vec2();//target的世界坐标
-        let tarPos = new cc.Vec2();
-        let WinSize = new cc.Vec2();
         let touchPos = event.touch._point;
         let x:cc.Vec2 = cc.Vec2.ZERO;
         this.getComponent("Helloworld").EndPos.y = touchPos.y;
@@ -136,31 +130,14 @@ export default class Helloworld extends cc.Component {
         x.y = this.getComponent("Helloworld").EndPos.y - this.getComponent("Helloworld").StartPos.y;
         event.target.x += x.x;
         event.target.y += x.y;
-        console.log("我是Move时候的descpos："+this.getComponent("Helloworld").descPos+"   我是Move时候的touchPos: "+touchPos)
         this.getComponent("Helloworld").StartPos.x =this.getComponent("Helloworld").EndPos.x;
         this.getComponent("Helloworld").StartPos.y =this.getComponent("Helloworld").EndPos.y;
 
     }
     BgCallBackEventStart(event){
-        let tarStaPos=new cc.Vec2();//target的坐标
-        let tarWorldPos = new cc.Vec2();//target的世界坐标
-        let tarPos = new cc.Vec2();
-        let WinSize = new cc.Vec2();
         let touchPos = event.touch._point;
-        tarStaPos.x = event.target.x;
-        tarStaPos.y = event.target.y;
-        console.log("看看（target的坐标）tarStaPos: "+tarStaPos);
-        tarWorldPos = event.target.convertToWorldSpaceAR(cc.Vec2.ZERO);
-        console.log("看看（target的世界坐标）tarWorldPos: "+tarWorldPos);
-        this.getComponent("Helloworld").descPos.x = tarWorldPos.x - touchPos.x;
-        this.getComponent("Helloworld").descPos.y = tarWorldPos.y - touchPos.y;
-        console.log("看看（触摸点的坐标）touchPos: "+touchPos);
-        console.log("看看（坐标差距）this.descPos: "+this.getComponent("Helloworld").descPos);
-
         this.getComponent("Helloworld").StartPos.x = touchPos.x;
         this.getComponent("Helloworld").StartPos.y = touchPos.y;
-
-
         
     }
     BgCallBackEventEnd(event){
