@@ -69,6 +69,8 @@ export default class Helloworld extends cc.Component {
         this.Sp2.node.on(cc.Node.EventType.TOUCH_MOVE,this.SpCallBackEventMove3,this.Sp3);
         this.Sp3.node.on(cc.Node.EventType.TOUCH_START,this.SpCallBackEvent3,this);
         this.Sp3.node.on(cc.Node.EventType.TOUCH_MOVE,this.SpCallBackEventMove3,this.Sp3);
+
+        // this.BgCallBackEventRestrict();
     }
 
 
@@ -130,6 +132,7 @@ export default class Helloworld extends cc.Component {
         x.y = this.getComponent("Helloworld").EndPos.y - this.getComponent("Helloworld").StartPos.y;
         event.target.x += x.x;
         event.target.y += x.y;
+        this.getComponent("Helloworld").BgCallBackEventRestrict();
         this.getComponent("Helloworld").StartPos.x =this.getComponent("Helloworld").EndPos.x;
         this.getComponent("Helloworld").StartPos.y =this.getComponent("Helloworld").EndPos.y;
 
@@ -140,6 +143,26 @@ export default class Helloworld extends cc.Component {
         this.getComponent("Helloworld").StartPos.y = touchPos.y;
         
     }
+
+    BgCallBackEventRestrict(){
+        let self = this;
+        let descX = Math.abs(self.Bg.node.width/2 - self.node.width/2);
+        let descY = Math.abs(self.Bg.node.height/2 - self.node.height/2);
+
+        if(self.Bg.node.x<-descX){
+            self.Bg.node.x = -descX;
+        }
+        if(self.Bg.node.x>descX){
+            self.Bg.node.x = descX;
+        }
+        if(self.Bg.node.y<-descY){
+            self.Bg.node.y = -descY;
+        }
+        if(self.Bg.node.y>descY){
+            self.Bg.node.y = descY;
+        }
+    }
+
     BgCallBackEventEnd(event){
         this.EndPos = event.touch._point;
         // console.log("EndPos: ");
