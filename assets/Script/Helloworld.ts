@@ -23,6 +23,8 @@ export default class Helloworld extends cc.Component {
 
     @property(cc.Button)
     Btn_Net:cc.Button=null;
+    @property(cc.Button)
+    Btn_ToVP1:cc.Button=null;
     @property(cc.Label)
     NetWorkMsg:cc.Label=null;
 
@@ -53,6 +55,7 @@ export default class Helloworld extends cc.Component {
         this.Bg.node.on(cc.Node.EventType.TOUCH_START,this.BgCallBackEventStart,this.node);
         this.Bg.node.on(cc.Node.EventType.TOUCH_MOVE,this.BgCallBackEventMove,self);
         this.Bg.node.on(cc.Node.EventType.TOUCH_END,this.BgCallBackEventEnd,self);
+        this.Btn_ToVP1.node.on(cc.Node.EventType.TOUCH_START,this.ToVP1,this);
         // this.Bg.node.on(cc.Node.EventType.TOUCH_CANCEL,this.BgCallBackEventMove,this.Bg);
     }
 
@@ -251,5 +254,9 @@ export default class Helloworld extends cc.Component {
         xhr.open("GET",url,true);
         xhr.send();
         self.NetWorkMsg.string = "联网开始";
+    }
+
+    ToVP1(){
+        cc.director.loadScene("Video");
     }
 }
