@@ -12,24 +12,19 @@ export default class NewClass extends cc.Component {
     delayTime=1;
     onLoad () {
         let self = this;
+        //以下是CVS文件读取并转换为数组存储。
         cc.loader.loadRes("test",function(err,res){
             if(err){
                 cc.error(err);
             }
             else{
                 self.resJson = JSON.stringify(res);
-                // resJson = res
                 let resS = JSON.parse(<string>self.resJson);
-                // let x = resJson.search("r");
-                // console.log(x);
-                // console.log(resJson);
-                // console.log("res length: "+res.length);
                 let RCount=0;
                 for(let u=0;u<self.resJson.length;u++){
                     if(self.resJson[u]=="r"){
                         self.SN.push(u);
                         RCount++;
-                        // console.log("SN Length: "+SN.length+"  r location "+u);
                     }
                 }
                 console.log("Rcount "+RCount);
@@ -52,14 +47,12 @@ export default class NewClass extends cc.Component {
             if(i==0){
                 y = self.resJson.substring(0,self.SN[i]);
                 y = y.substring(1,y.length-1);
-                // console.log("y : "+y);
                 Content.push(y);
             }
             else{
                 y = self.resJson.substring(self.SN[i-1],self.SN[i]);
                 y = y.substring(y.search("n"));
                 y = y.substring(1,y.length-1);
-                // console.log("y : "+y);
                 Content.push(y);
             }
         }
