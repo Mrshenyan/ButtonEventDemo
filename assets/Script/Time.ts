@@ -10,10 +10,14 @@ export default class NewClass extends cc.Component {
     Results:cc.Label[]=[];
     @property(cc.Button)
     BTN:cc.Button[]=[];
+    @property(cc.Prefab)
+    BtnNodes:cc.Prefab=null;
 
 
     onLoad () {
 
+        let prefab = cc.instantiate(this.BtnNodes);
+        this.node.addChild(prefab);
         for(let i=0;i<this.BTN.length;i++){
             this.BTN[i].node.on(cc.Node.EventType.TOUCH_START,this.callBackFun,this.Results[i]);
             this.BTN[i].node.tag = i;

@@ -23,5 +23,8 @@ export default class NewClass extends cc.Component {
 
     sendMsg(){
         console.log("已发送");
+        let testEvent = new cc.Event.EventCustom("CUSTOMEVENT",false);
+        testEvent.setUserData("testCustomEvent");
+        cc.find("Canvas").dispatchEvent(testEvent);
     }
 }

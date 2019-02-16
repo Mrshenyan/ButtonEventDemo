@@ -210,6 +210,9 @@
     "_enabled": true,
     "spPlist": {
       "__uuid__": "32c3e941-c571-49f3-bd43-6540a69a4572"
+    },
+    "BtnNodes": {
+      "__uuid__": "76d6fc1d-9043-4e0e-ae6e-0621da43d732"
     }
   }
 ]

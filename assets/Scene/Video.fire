@@ -230,7 +230,7 @@
     "_position": {
       "__type__": "cc.Vec2",
       "x": 0,
-      "y": 0
+      "y": 171
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -282,6 +282,9 @@
     "_enabled": true,
     "player": {
       "__id__": 6
+    },
+    "BtnNodes": {
+      "__uuid__": "76d6fc1d-9043-4e0e-ae6e-0621da43d732"
     }
   }
 ]

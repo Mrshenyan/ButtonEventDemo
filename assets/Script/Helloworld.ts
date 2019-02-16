@@ -27,6 +27,8 @@ export default class Helloworld extends cc.Component {
     Btn_ToVP1:cc.Button=null;
     @property(cc.Label)
     NetWorkMsg:cc.Label=null;
+    @property(cc.Prefab)
+    BtnNodes:cc.Prefab=null;
 
 
 
@@ -40,6 +42,8 @@ export default class Helloworld extends cc.Component {
         this.StartPos = cc.Vec2.ZERO;
         this.EndPos = cc.Vec2.ZERO;
         let self = this;
+        let prefab = cc.instantiate(this.BtnNodes);
+        this.node.addChild(prefab);
         console.log("看看："+this.node.position);
         let Btn_CallBackEvent = new cc.Component.EventHandler();
         // console.log(Btn_CallBackEvent);

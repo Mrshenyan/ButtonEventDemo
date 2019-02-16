@@ -6,12 +6,16 @@ export default class NewClass extends cc.Component {
     readBtn:cc.Button=null;
     @property(cc.Button)
     deT:cc.Button=null;
+    @property(cc.Prefab)
+    BtnNodes:cc.Prefab=null;
 
     SN:Array<number>=[];
     resJson:String;
     delayTime=1;
     onLoad () {
         let self = this;
+        let prefab = cc.instantiate(this.BtnNodes);
+        this.node.addChild(prefab);
         //以下是CVS文件读取并转换为数组存储。
         cc.loader.loadRes("test",function(err,res){
             if(err){

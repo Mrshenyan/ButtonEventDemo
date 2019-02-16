@@ -7,8 +7,14 @@ export default class NewClass extends cc.Component {
     
     @property(cc.Sprite)
     Sp3:cc.Sprite = null;
+    @property(cc.Prefab)
+    BtnNodes:cc.Prefab=null;
 
-    // onLoad () {}
+    onLoad () {
+        
+        // let prefab = cc.instantiate(this.BtnNodes);
+        // this.node.addChild(prefab);
+    }
 
     start () {
 
