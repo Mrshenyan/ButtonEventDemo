@@ -7,14 +7,24 @@ export default class NewClass extends cc.Component {
     spPlist:cc.SpriteAtlas=null;
     @property(cc.Prefab)
     BtnNodes:cc.Prefab=null;
+    @property(cc.Sprite)
+    sp:cc.Sprite=null;
 
+    sps:cc.SpriteFrame[]=[];
 
     onLoad () {
-        let prefab = cc.instantiate(this.BtnNodes);
-        this.node.addChild(prefab);
-        let testReadPlistNode=new cc.Node("rePN");
-        let sp = testReadPlistNode.addComponent(cc.Sprite);
-        this.spPlist
+        let self = this;
+        let Btnprefab = cc.instantiate(this.BtnNodes);
+        this.node.addChild(Btnprefab);
+        // let testReadPlistNode=new cc.Node("rePN");
+        // let sp = testReadPlistNode.addComponent(cc.Sprite);
+        // this.spPlist
+        this.sps = this.spPlist.getSpriteFrames();
+        console.log(this.sps);
+        cc.loader.loadRes("./testPlist/AutoAtlas",cc.SpriteAtlas,function(err,res){
+            console.log(res);
+            self.sp.spriteFrame = res.getSpriteFrame("YUC4OAE%KD~19X@5}R3]Q56");
+        });
 
     }
 

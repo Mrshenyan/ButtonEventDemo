@@ -6,12 +6,12 @@
   "padding": 1,
   "allowRotation": true,
   "forceSquared": false,
-  "powerOfTwo": true,
+  "powerOfTwo": false,
   "heuristices": "BestAreaFit",
   "format": "png",
   "quality": 80,
   "contourBleed": false,
   "paddingBleed": false,
-  "filterUnused": true,
+  "filterUnused": false,
   "subMetas": {}
 }
