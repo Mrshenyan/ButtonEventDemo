@@ -77,6 +77,9 @@ export default class Helloworld extends cc.Component {
         this.Sp3.node.on(cc.Node.EventType.TOUCH_START,this.SpCallBackEvent3,this);
         this.Sp3.node.on(cc.Node.EventType.TOUCH_MOVE,this.SpCallBackEventMove3,this.Sp3);
 
+        cc.director.getScheduler().schedule(function(dt){
+            
+        },this.BtnNodes,1,false);
         // this.BgCallBackEventRestrict();
     }
 
