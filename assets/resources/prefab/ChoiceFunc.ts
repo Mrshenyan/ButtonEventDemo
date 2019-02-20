@@ -52,8 +52,8 @@ export default class NewClass extends cc.Component {
                 break;
             }
             case 6:{
-                cc.director.loadScene("");
-                console.log("暂无");
+                cc.director.loadScene("ProgressBar");
+                console.log("Progress");
                 break;
             }
         }
