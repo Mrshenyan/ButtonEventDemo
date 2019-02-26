@@ -23,7 +23,7 @@ export default class NewClass extends cc.Component {
         console.log(this.sps);
         cc.loader.loadRes("./testPlist/AutoAtlas",cc.SpriteAtlas,function(err,res){
             console.log(res);
-            self.sp.spriteFrame = res.getSpriteFrame("YUC4OAE%KD~19X@5}R3]Q56");
+            self.sp.spriteFrame = res.getSpriteFrame("1qa");
         });
 
     }

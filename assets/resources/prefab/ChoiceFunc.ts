@@ -52,8 +52,13 @@ export default class NewClass extends cc.Component {
                 break;
             }
             case 6:{
-                cc.director.loadScene("ProgressBar");
+                cc.director.loadScene("EncryptPic");
+                // cc.director.loadScene("ProgressBar");
                 console.log("Progress");
+                break;
+            }
+            case 7:{
+                console.log("Encryptpic");
                 break;
             }
         }

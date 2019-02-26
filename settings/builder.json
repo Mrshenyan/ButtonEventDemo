@@ -7,7 +7,7 @@
   "includeAnySDK": false,
   "includeSDKBox": false,
   "inlineSpriteFrames": true,
-  "inlineSpriteFrames_native": true,
+  "inlineSpriteFrames_native": false,
   "jailbreakPlatform": false,
   "md5Cache": false,
   "mergeStartScene": false,
@@ -19,15 +19,15 @@
     "portrait": false,
     "upsideDown": false
   },
-  "packageName": "org.cocos2d.VP1",
+  "packageName": "org.cocos2d.DCdemo",
   "privateKey": "",
   "qqplay": {
     "REMOTE_SERVER_ROOT": "",
     "orientation": "portrait"
   },
   "renderMode": "0",
-  "startScene": "015c5339-e3b8-45a8-ac3d-a65876be37bc",
-  "title": "Demos",
+  "startScene": "2d2f792f-a40c-49bb-a189-ed176a246e49",
+  "title": "ButtonEventDemos",
   "webOrientation": "auto",
   "wechatgame": {
     "REMOTE_SERVER_ROOT": "",
