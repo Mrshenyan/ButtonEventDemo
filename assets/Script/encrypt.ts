@@ -13,7 +13,9 @@ export default class NewClass extends cc.Component {
 
         let btns = cc.instantiate(this.btnPrefab);
         this.node.addChild(btns);
-        this.Encrypting();
+        if(cc.sys.isNative){
+            this.Encrypting();
+        }
     }
 
     start () {
@@ -24,7 +26,8 @@ export default class NewClass extends cc.Component {
 
     Encrypting(){
         let self = this;
-        jsb.reflection.callStaticMethod("org/cocos2dx/javascript/AppActivity","encrypt","(Ljava/lang/String)V",self.url);
+        jsb.reflection.callStaticMethod("org/cocos2dx/javascript/AppActivity","encrypt","(Ljava/lang/String)V",self.url)
+        // jsb.reflection.callStaticMethod("org/cocos2dx/javascript/AppActivity","encrypt","(Ljava/lang/String)V",self.url);
         console.log("Encrypt Start ");
     }
 
