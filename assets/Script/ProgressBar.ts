@@ -46,13 +46,12 @@ export default class NewClass extends cc.Component {
             }
         }
         function b(){
-            x+=0.01;
+            x+=0.001;
             console.log(x);
-            radian = x*Math.PI;
+            radian = 2*x*Math.PI;
             console.log(radian)
             self.Graphics.arc(100,100,50,0,radian);
             self.Graphics.stroke();
-            self.Graphics.clear();
         }
     }
 }
