@@ -5,10 +5,14 @@ export default class NewClass extends cc.Component {
 
     @property(cc.Button)
     BtnEncrypt:cc.Button = null;
+    @property(cc.Prefab)
+    btnPrefab:cc.Prefab=null
 
     url="./encryptpic/1qa";
     onLoad () {
 
+        let btns = cc.instantiate(this.btnPrefab);
+        this.node.addChild(btns);
         this.Encrypting();
     }
 
