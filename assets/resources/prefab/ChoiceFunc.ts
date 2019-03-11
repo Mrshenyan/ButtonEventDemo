@@ -52,13 +52,60 @@ export default class NewClass extends cc.Component {
                 break;
             }
             case 6:{
-                cc.director.loadScene("EncryptPic");
-                // cc.director.loadScene("ProgressBar");
+                cc.director.loadScene("ProgressBar");
                 console.log("Progress");
                 break;
             }
             case 7:{
+                cc.director.loadScene("EncryptPic");
                 console.log("Encryptpic");
+                break;
+            }
+            case 8:{
+                cc.director.loadScene("Matchvs");
+                console.log("Encryptpic");
+                break;
+            }
+            case 9:{
+                cc.director.loadScene("DragonBone");
+                console.log("Encryptpic");
+                break;
+            }
+            case 10:{
+                cc.director.loadScene("transfer");
+                console.log("Encryptpic");
+                break;
+            }
+            case 11:{
+                console.log("Action");
+                break;
+            }
+            case 12:{
+                console.log("暂无");
+                break;
+            }
+            case 13:{
+                console.log("暂无");
+                break;
+            }
+            case 14:{
+                console.log("暂无");
+                break;
+            }
+            case 15:{
+                console.log("暂无");
+                break;
+            }
+            case 16:{
+                console.log("暂无");
+                break;
+            }
+            case 17:{
+                console.log("暂无");
+                break;
+            }
+            case 18:{
+                console.log("暂无");
                 break;
             }
         }
