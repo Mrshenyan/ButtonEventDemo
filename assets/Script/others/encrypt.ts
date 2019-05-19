@@ -27,12 +27,14 @@ export default class NewClass extends cc.Component {
     Encrypting(){
         let self = this;
         jsb.reflection.callStaticMethod("org/cocos2dx/javascript/AppActivity","encrypt","(Ljava/lang/String)V",self.url)
+        console.log(self.url);
         // jsb.reflection.callStaticMethod("org/cocos2dx/javascript/AppActivity","encrypt","(Ljava/lang/String)V",self.url);
         console.log("Encrypt Start ");
     }
 
     unEncrypt(){
         let self = this;
-        jsb.reflection.callStaticMethod("org/cocos2dx/javascript/AppActivity","encrypt","()V");
+        let res = jsb.reflection.callStaticMethod("org/cocos2dx/javascript/AppActivity","unEncrypt","()V");
+        console.log(res);
     }
 }
