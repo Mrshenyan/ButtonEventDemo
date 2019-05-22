@@ -1,7 +1,7 @@
 const {ccclass, property} = cc._decorator;
 
 @ccclass
-export default class NodePool extends cc.Component {
+export default class NodePools extends cc.Component {
 
     @property(cc.Label)
     
