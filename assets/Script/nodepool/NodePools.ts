@@ -3,8 +3,8 @@ const {ccclass, property} = cc._decorator;
 @ccclass
 export default class NodePools extends cc.Component {
 
-    @property(cc.Label)
-    
+    // @property(cc.Label)
+    // testt
 
     // LIFE-CYCLE CALLBACKS:
 

@@ -11,7 +11,7 @@ export default class NewClass extends cc.Component {
     // LIFE-CYCLE CALLBACKS:
 
     onLoad () {
-        this.BtnNodes[0].on(cc.Node.EventType.TOUCH_START,this.DrawPic,this.BtnNodes[0]);
+        // this.BtnNodes[0].on(cc.Node.EventType.TOUCH_START,this.DrawPic,this.BtnNodes[0]);
     }
 
     start () {
@@ -70,7 +70,6 @@ export default class NewClass extends cc.Component {
         function A(){
             self.PanelNode.getChildByName(touchName).removeComponent(cc.Graphics);
             var a = self.PanelNode.getChildByName(touchName).addComponent(cc.Graphics);
-            
             a.lineWidth = 1;
             // g.fillColor = cc.hexToColor('#ff0000');
             
@@ -98,7 +97,12 @@ export default class NewClass extends cc.Component {
             // a.fill();
         }
         function B(){
-
+            // self.PanelNode.getChildByName(touchName).removeComponent(cc.Graphics);
+            // var b = self.PanelNode.getChildByName(touchName).addComponent(cc.Graphics);
+            let path = self.addComponent('R.path');
+            path.selected = true;
+            path.circle(0,0,30);
+            path.makePath();
         }
         function C(){
 
