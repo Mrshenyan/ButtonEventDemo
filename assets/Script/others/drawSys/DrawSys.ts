@@ -1,3 +1,5 @@
+import triangle from "./Polygon/triangle";
+
 const {ccclass, property} = cc._decorator;
 
 @ccclass
@@ -9,9 +11,9 @@ export default class NewClass extends cc.Component {
     BtnNodes:cc.Node[]=[];
 
     // LIFE-CYCLE CALLBACKS:
-
+    sharp:triangle = triangle.instance;
     onLoad () {
-        // this.BtnNodes[0].on(cc.Node.EventType.TOUCH_START,this.DrawPic,this.BtnNodes[0]);
+        this.BtnNodes[9].on(cc.Node.EventType.TOUCH_START,this.sharp.CalcArea,this.sharp);
     }
 
     start () {
@@ -79,13 +81,13 @@ export default class NewClass extends cc.Component {
             a.lineTo(70,20);
             a.lineTo(20,100);
             a.strokeColor = cc.Color.YELLOW;
-            // a.close();
+            a.close();
             // a.moveTo(2,2);
             // a.bezierCurveTo(2,4,8,16,8,2);
             // a.close();
             a.fillColor = cc.Color.RED;
             a.stroke();
-            // a.fill();
+            a.fill();
 
             
 
@@ -105,6 +107,9 @@ export default class NewClass extends cc.Component {
             path.makePath();
         }
         function C(){
+            let tria = triangle.instance;
+            let pos:cc.Vec2 = new cc.Vec2(20,20);
+            let drawtria = tria.Draw(self.PanelNode.getChildByName(touchName),new cc.Vec2(20,20),new cc.Vec2(50,20),new cc.Vec2(50,60),new cc.Vec2(20,60));
 
         }
         function D(){
@@ -125,5 +130,6 @@ export default class NewClass extends cc.Component {
         function I(){
 
         }
+
     }
 }
