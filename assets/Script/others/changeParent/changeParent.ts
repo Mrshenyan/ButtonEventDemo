@@ -31,12 +31,12 @@ export default class NewClass extends cc.Component {
 
     // update (dt) {}
     ChanreParent(){
-        this.Helloworld.parent = this.BG;
+        this.Helloworld.node.parent = this.BG.node;
     }
 
     ChanreParent2(){
         this.Helloworld.node.zIndex = this.BG.node.zIndex+1;
-        this.Helloworld.parent = this.BG;
+        this.Helloworld.node.parent = this.BG.node;
     }
 
     ChanreParent3(){
@@ -52,7 +52,7 @@ export default class NewClass extends cc.Component {
         // HW.parent = null;
         let node = cc.find("Canvas/HelloWorld");
         node.zIndex = this.BG.node.zIndex+1;
-        node.parent = this.BG;
+        node.parent = this.BG.node;
         // this.Helloworld.parent = this.BG;
     }
     ChanreParent5(){
@@ -60,7 +60,7 @@ export default class NewClass extends cc.Component {
         // HW.parent = null;
         let node = cc.find("Canvas/HelloWorld");
         node.zIndex = this.BG.node.zIndex+1;
-        node.parent = this.BG;
+        node.parent = this.BG.node;
         // this.Helloworld.parent = this.BG;
     }
     ChanreParent6(){
@@ -68,7 +68,7 @@ export default class NewClass extends cc.Component {
         // HW.parent = null;
         let node = cc.find("Canvas/HelloWorld");
         node.zIndex = this.BG.node.zIndex+1;
-        node.parent = this.BG;
+        node.parent = this.BG.node;
         // this.Helloworld.parent = this.BG;
     }
 }

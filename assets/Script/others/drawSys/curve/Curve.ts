@@ -11,6 +11,13 @@
 const {ccclass, property} = cc._decorator;
 
 @ccclass
-export default class Curve {
+export default class Curve implements CurveInterface {
+    [propName: string]: any;    edgeColor: cc.Color;
+    fillColor: cc.Color;
+    area: Number;
+    CalcArea(): Number {
+        return 0;
+    }
+   
     
 }

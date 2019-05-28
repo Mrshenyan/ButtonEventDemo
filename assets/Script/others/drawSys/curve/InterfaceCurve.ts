@@ -3,16 +3,30 @@ interface CurveInterface {
     fillColor:cc.Color;
     area:Number;
     [propName:string]:any;
+    
+}
+
+
+class CurveClass implements CurveInterface{
+    [propName: string]: any;    
+    edgeColor: cc.Color;
+    fillColor: cc.Color;
+    area: Number;
 
     
-    CalcArea():Number;
+    public static readonly instance = new CurveClass();
+    private constructor(){};
+
     /**
      * 
-     * @param node parent node
-     * @param LinePos points pos
+     * @param radius 圆的半径或椭圆的定长2a
+     * @param focus1 圆的圆心或椭圆的焦点1坐标
+     * @param focus2 椭圆的焦点2坐标
      */
-    Draw(node:cc.Node,...LinePos:cc.Vec2[]):void;
+    Draw(radius: number,focus1: cc.Vec2, focus2?: cc.Vec2, ): void{
+        if(focus2==undefined){
 
-    
+        }
+    }
 }
 

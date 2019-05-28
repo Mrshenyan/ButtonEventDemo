@@ -12,7 +12,6 @@ export default class NewClass extends cc.Component {
     onLoad () {
         for(let i=0;i<this.Btns.length;i++){
             this.Btns[i].node.on(cc.Node.EventType.TOUCH_START,this.BtnChoice,this);
-            this.Btns[i].node.tag = i;
         }
     }
 
