@@ -113,7 +113,7 @@ export default class triangle extends cc.Component implements Polygon {
         }
         tri.strokeColor = cc.Color.YELLOW;
         tri.close();
-        tri.fillColor = cc.Color.RED;
+        tri.fillColor = new cc.Color(255,0,0,100);//create a color object dynamicly
         tri.stroke();
         tri.fill();
         return tri;

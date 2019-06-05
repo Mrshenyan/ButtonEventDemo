@@ -5,10 +5,27 @@ const {ccclass, property} = cc._decorator;
 @ccclass
 export default class NewClass extends cc.Component {
 
-    @property(cc.Node)
+    @property({
+        type:cc.Node,
+        displayName:"panelNode",
+        tooltip:"视图窗口"
+    })
     PanelNode:cc.Node=null;
     @property(cc.Node)
     BtnNodes:cc.Node[]=[];
+    @property({
+        type:cc.Enum({
+            未知:0,
+            男:1,
+            女:2
+        }),
+        displayName:"性别"
+    })
+    sex={
+        未知:0,
+        男:1,
+        女:2
+    }.未知;
 
     // LIFE-CYCLE CALLBACKS:
     sharp:triangle = triangle.instance;
@@ -108,8 +125,15 @@ export default class NewClass extends cc.Component {
         }
         function C(){
             let tria = triangle.instance;
-            let pos:cc.Vec2 = new cc.Vec2(20,20);
-            let drawtria = tria.Draw(self.PanelNode.getChildByName(touchName),new cc.Vec2(20,20),new cc.Vec2(50,20),new cc.Vec2(50,60),new cc.Vec2(20,60));
+            // let pos:cc.Vec2 = new cc.Vec2(-2000,-1000);
+            let PI = Math.PI;
+            let x = Math.cos(PI/3);
+            let drawtria = tria.Draw(cc.find("Canvas/I"),
+                    new cc.Vec2(0,0),
+                    new cc.Vec2(100,0),
+                    new cc.Vec2(100+100*Math.cos(72*PI/180),100*Math.sin(72*PI/180)),
+                    new cc.Vec2(50,50*Math.tan(72*PI/180)),
+                    new cc.Vec2(-100*Math.cos(72*PI/180),100*Math.sin(72*PI/180)));
 
         }
         function D(){
