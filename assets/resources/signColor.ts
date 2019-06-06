@@ -104,11 +104,11 @@ export default class signColor extends cc.Component {
             this.TurnOrNot = true;
         }
         else{
-            this.previousKey=event.keyCode;
             this.TurnOrNot = false;
         }
         switch(event.keyCode){
             case cc.macro.KEY.left:{
+                this.previousKey=event.keyCode;
                 switch(this.previousKey){
                     case cc.macro.KEY.up:{
                         this.node.rotation+=90;
@@ -116,12 +116,16 @@ export default class signColor extends cc.Component {
                     }
                     case cc.macro.KEY.down:{
                         this.node.rotation-=90;
+                        break;
+                    }
+                    case cc.macro.KEY.left:{
                         break;
                     }
                 }
                 break;
             }
             case cc.macro.KEY.right:{
+                this.previousKey=event.keyCode;
                 switch(this.previousKey){
                     case cc.macro.KEY.up:{
                         this.node.rotation+=90;
@@ -131,10 +135,14 @@ export default class signColor extends cc.Component {
                         this.node.rotation-=90;
                         break;
                     }
+                    case cc.macro.KEY.right:{
+                        break;
+                    }
                 }
                 break;
             }
             case cc.macro.KEY.up:{
+                this.previousKey=event.keyCode;
                 switch(this.previousKey){
                     case cc.macro.KEY.left:{
                         this.node.rotation-=90;
@@ -142,12 +150,16 @@ export default class signColor extends cc.Component {
                     }
                     case cc.macro.KEY.right:{
                         this.node.rotation+=90;
+                        break;
+                    }
+                    case cc.macro.KEY.up:{
                         break;
                     }
                 }
                 break;
             }
             case cc.macro.KEY.down:{
+                this.previousKey=event.keyCode;
                 switch(this.previousKey){
                     case cc.macro.KEY.left:{
                         this.node.rotation-=90;
@@ -155,6 +167,9 @@ export default class signColor extends cc.Component {
                     }
                     case cc.macro.KEY.right:{
                         this.node.rotation+=90;
+                        break;
+                    }
+                    case cc.macro.KEY.down:{
                         break;
                     }
                 }
