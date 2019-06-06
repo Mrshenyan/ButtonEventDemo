@@ -11,7 +11,7 @@
 const {ccclass, property} = cc._decorator;
 
 @ccclass
-export default class signColor extends cc.Component {
+export default class tank extends cc.Component {
 
     @property({
         type:cc.Node,
@@ -22,7 +22,6 @@ export default class signColor extends cc.Component {
     rootNode:cc.Node=null;
     onLoad(){
         this.drawIt();
-        cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN,this.Control,this);
     }
 
     static DrawMAP={
@@ -72,7 +71,7 @@ export default class signColor extends cc.Component {
         for(let i=0;i<this.Nodes.length;i++){
             
             // Sketchpad.close();
-            if(signColor.DrawMAP.MAP_1[i]){
+            if(tank.DrawMAP.MAP_1[i]){
                 let Sketchpad = this.Nodes[i].addComponent(cc.Graphics);
                 Sketchpad.lineWidth=1;
                 Sketchpad.moveTo(allblockPoses[i][0].x,allblockPoses[i][0].y);
@@ -91,9 +90,5 @@ export default class signColor extends cc.Component {
                 console.log(allblockPoses[i][3]);
             }
         }
-    }
-
-    Control(event){
-
     }
 }
