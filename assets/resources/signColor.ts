@@ -20,6 +20,12 @@ export default class signColor extends cc.Component {
     Nodes:cc.Node[]=[];
     @property(cc.Node)
     rootNode:cc.Node=null;
+    @property({
+        type:Boolean,
+        tooltip:"是否转向",
+    })
+    TurnOrNot:Boolean=false;
+    previousKey:number=0;
     onLoad(){
         this.drawIt();
         cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN,this.Control,this);
@@ -94,6 +100,30 @@ export default class signColor extends cc.Component {
     }
 
     Control(event){
+        if(this.previousKey!=0&&this.previousKey==event.keyCode){
+            this.TurnOrNot = true;
+        }
+        else{
+            this.TurnOrNot = false;
+        }
+        switch(event.keyCode){
+            case cc.macro.KEY.left:{
+                //TODO here should add the code that is used turn round,or run
+                turnRound(this.previousKey);
+            }
+            case cc.macro.KEY.right:{
 
+            }
+            case cc.macro.KEY.up:{
+
+            }
+            case cc.macro.KEY.down:{
+
+            }
+        }
+
+        function turnRound(preCode){
+
+        }
     }
 }
