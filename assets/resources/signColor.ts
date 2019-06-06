@@ -109,7 +109,6 @@ export default class signColor extends cc.Component {
         }
         switch(event.keyCode){
             case cc.macro.KEY.left:{
-                //TODO here should add the code that is used turn round,or run
                 switch(this.previousKey){
                     case cc.macro.KEY.up:{
                         this.node.rotation+=90;
@@ -161,10 +160,6 @@ export default class signColor extends cc.Component {
                 }
                 break;
             }
-        }
-
-        function turnRound(preCode){
-
         }
     }
 }
