@@ -104,21 +104,62 @@ export default class signColor extends cc.Component {
             this.TurnOrNot = true;
         }
         else{
+            this.previousKey=event.keyCode;
             this.TurnOrNot = false;
         }
         switch(event.keyCode){
             case cc.macro.KEY.left:{
                 //TODO here should add the code that is used turn round,or run
-                turnRound(this.previousKey);
+                switch(this.previousKey){
+                    case cc.macro.KEY.up:{
+                        this.node.rotation+=90;
+                        break;
+                    }
+                    case cc.macro.KEY.down:{
+                        this.node.rotation-=90;
+                        break;
+                    }
+                }
+                break;
             }
             case cc.macro.KEY.right:{
-
+                switch(this.previousKey){
+                    case cc.macro.KEY.up:{
+                        this.node.rotation+=90;
+                        break;
+                    }
+                    case cc.macro.KEY.down:{
+                        this.node.rotation-=90;
+                        break;
+                    }
+                }
+                break;
             }
             case cc.macro.KEY.up:{
-
+                switch(this.previousKey){
+                    case cc.macro.KEY.left:{
+                        this.node.rotation-=90;
+                        break;
+                    }
+                    case cc.macro.KEY.right:{
+                        this.node.rotation+=90;
+                        break;
+                    }
+                }
+                break;
             }
             case cc.macro.KEY.down:{
-
+                switch(this.previousKey){
+                    case cc.macro.KEY.left:{
+                        this.node.rotation-=90;
+                        break;
+                    }
+                    case cc.macro.KEY.right:{
+                        this.node.rotation+=90;
+                        break;
+                    }
+                }
+                break;
             }
         }
 
