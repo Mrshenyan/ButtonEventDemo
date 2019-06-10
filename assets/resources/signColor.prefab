@@ -63,9 +63,9 @@
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 221,
-      "g": 221,
-      "b": 221,
+      "r": 255,
+      "g": 255,
+      "b": 255,
       "a": 255
     },
     "_contentSize": {
@@ -798,6 +798,7 @@
     "rootNode": {
       "__id__": 1
     },
+    "curdirection": "up",
     "_id": ""
   },
   {
@@ -807,7 +808,7 @@
     "node": {
       "__id__": 1
     },
-    "_enabled": true,
+    "_enabled": false,
     "_spriteFrame": {
       "__uuid__": "a23235d1-15db-4b95-8439-a2e005bfff91"
     },
