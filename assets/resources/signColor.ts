@@ -1,13 +1,3 @@
-// Learn TypeScript:
-//  - [Chinese] https://docs.cocos.com/creator/manual/zh/scripting/typescript.html
-//  - [English] http://www.cocos2d-x.org/docs/creator/manual/en/scripting/typescript.html
-// Learn Attribute:
-//  - [Chinese] https://docs.cocos.com/creator/manual/zh/scripting/reference/attributes.html
-//  - [English] http://www.cocos2d-x.org/docs/creator/manual/en/scripting/reference/attributes.html
-// Learn life-cycle callbacks:
-//  - [Chinese] https://docs.cocos.com/creator/manual/zh/scripting/life-cycle-callbacks.html
-//  - [English] http://www.cocos2d-x.org/docs/creator/manual/en/scripting/life-cycle-callbacks.html
-
 const {ccclass, property} = cc._decorator;
 
 @ccclass
@@ -24,11 +14,19 @@ export default class signColor extends cc.Component {
         type:Boolean,
         tooltip:"是否转向",
     })
-    TurnOrNot:Boolean=false;
-    previousKey:number=0;
+    // TurnOrNot:Boolean=false;
+    // previousKey:number=0;
+    curdirection="up";
+    keyClicked=false;
+    upfalge=false;
+    downfalge=false;
+    leftfalge=false;
+    rightfalge=false;
     onLoad(){
+        this.node.scale=0.25;
         this.drawIt();
         cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN,this.Control,this);
+        cc.systemEvent.on(cc.SystemEvent.EventType.KEY_UP,this.KeyUpFunc,this);
     }
 
     static DrawMAP={
@@ -90,81 +88,110 @@ export default class signColor extends cc.Component {
                 Sketchpad.fillColor = cc.Color.BLACK;
                 Sketchpad.stroke();
                 Sketchpad.fill();
-                console.log("draw the "+i+" block");
-                console.log(allblockPoses[i][0]);
-                console.log(allblockPoses[i][1]);
-                console.log(allblockPoses[i][2]);
-                console.log(allblockPoses[i][3]);
+                // console.log("draw the "+i+" block");
+                // console.log(allblockPoses[i][0]);
+                // console.log(allblockPoses[i][1]);
+                // console.log(allblockPoses[i][2]);
+                // console.log(allblockPoses[i][3]);
             }
         }
     }
-
+    KeyUpFunc(){
+        this.upfalge=false;
+        this.downfalge=false;
+        this.leftfalge=false;
+        this.rightfalge=false;
+    }
     Control(event){
-        if(this.previousKey!=0&&this.previousKey==event.keyCode){
-            this.TurnOrNot = true;
-        }
-        else{
-            this.previousKey=event.keyCode;
-            this.TurnOrNot = false;
-        }
-        switch(event.keyCode){
-            case cc.macro.KEY.left:{
-                //TODO here should add the code that is used turn round,or run
-                switch(this.previousKey){
+        switch(this.curdirection){
+            case "up":{
+                switch(event.keyCode){
                     case cc.macro.KEY.up:{
-                        this.node.rotation+=90;
+                        this.node.y+=2;
                         break;
                     }
                     case cc.macro.KEY.down:{
-                        this.node.rotation-=90;
                         break;
                     }
-                }
-                break;
-            }
-            case cc.macro.KEY.right:{
-                switch(this.previousKey){
-                    case cc.macro.KEY.up:{
-                        this.node.rotation+=90;
-                        break;
-                    }
-                    case cc.macro.KEY.down:{
-                        this.node.rotation-=90;
-                        break;
-                    }
-                }
-                break;
-            }
-            case cc.macro.KEY.up:{
-                switch(this.previousKey){
                     case cc.macro.KEY.left:{
                         this.node.rotation-=90;
+                        this.curdirection = "left";
                         break;
                     }
                     case cc.macro.KEY.right:{
                         this.node.rotation+=90;
+                        this.curdirection = "right";
                         break;
                     }
                 }
                 break;
             }
-            case cc.macro.KEY.down:{
-                switch(this.previousKey){
+            case "down":{
+                switch(event.keyCode){
+                    case cc.macro.KEY.up:{
+                        break;
+                    }
+                    case cc.macro.KEY.down:{
+                        this.node.y-=2;
+                        break;
+                    }
                     case cc.macro.KEY.left:{
-                        this.node.rotation-=90;
+                        this.node.rotation+=90;
+                        this.curdirection = "left";
                         break;
                     }
                     case cc.macro.KEY.right:{
-                        this.node.rotation+=90;
+                        this.node.rotation-=90;
+                        this.curdirection = "right";
                         break;
                     }
                 }
                 break;
             }
-        }
-
-        function turnRound(preCode){
-
+            case "left":{
+                switch(event.keyCode){
+                    case cc.macro.KEY.up:{
+                        this.node.rotation+=90;
+                        this.curdirection = "up";
+                        break;
+                    }
+                    case cc.macro.KEY.down:{
+                        this.node.rotation-=90;
+                        this.curdirection = "down";
+                        break;
+                    }
+                    case cc.macro.KEY.left:{
+                        this.node.x-=2;
+                        break;
+                    }
+                    case cc.macro.KEY.right:{
+                        break;
+                    }
+                }
+                break;
+            }
+            case "right":{
+                switch(event.keyCode){
+                    case cc.macro.KEY.up:{
+                        this.node.rotation-=90;
+                        this.curdirection = "up";
+                        break;
+                    }
+                    case cc.macro.KEY.down:{
+                        this.node.rotation+=90;
+                        this.curdirection = "down";
+                        break;
+                    }
+                    case cc.macro.KEY.left:{
+                        break;
+                    }
+                    case cc.macro.KEY.right:{
+                        this.node.x+=2;
+                        break;
+                    }
+                }
+                break;
+            }
         }
     }
 }
