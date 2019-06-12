@@ -97,10 +97,6 @@ export default class signColor extends cc.Component {
         }
     }
     KeyUpFunc(){
-        this.upfalge=false;
-        this.downfalge=false;
-        this.leftfalge=false;
-        this.rightfalge=false;
     }
     Control(event){
         switch(this.curdirection){
