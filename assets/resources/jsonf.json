@@ -1,8 +1,62 @@
 [
 	{
-		"name":"A_100001","star":"1","atti":{"name":"瓜子","SN":"1"},"unLock":{"grade":"1"},"consume":{}
+		"name":"A_100000","star":"1","atti":{"name":"瓜子","SN":"1"},"unLock":{"grade":"1"},"consume":{"A":"","B":""},"rare":"1","features":{"DE":"-3","ZH":"","TI":"","ME":"","LA":""}
 	},
 	{
-		"name":"A_100001","star":"1","atti":{"name":"树棍","SN":"1"},"unLock":{"grade":"1"},"consume":{}
-	}
+		"name":"A_100001","star":"1","atti":{"name":"树棍","SN":"1"},"unLock":{"grade":"1"},"consume":{"A":"","B":""},"rare":"1","features":{"DE":"-3","ZH":"","TI":"","ME":"","LA":""}
+	},
+	{
+		"name":"A_100002","star":"1","atti":{"name":"螺丝","SN":"1"},"unLock":{"grade":"1"},"consume":{"A":"","B":""},"rare":"1","features":{"DE":"-3","ZH":"","TI":"","ME":"","LA":""}
+	},
+	{
+		"name":"A_100003","star":"1","atti":{"name":"铁块","SN":"1"},"unLock":{"grade":"1"},"consume":{"A":"","B":""},"rare":"1","features":{"DE":"-3","ZH":"","TI":"","ME":"","LA":""}
+	},
+	{
+		"name":"A_100004","star":"1","atti":{"name":"皮筋","SN":"1"},"unLock":{"grade":"1"},"consume":{"A":"","B":""},"rare":"1","features":{"DE":"-3","ZH":"","TI":"","ME":"","LA":""}
+	},
+	{
+		"name":"A_100005","star":"1","atti":{"name":"纸","SN":"1"},"unLock":{"grade":"1"},"consume":{"A":"","B":""},"rare":"1","features":{"DE":"-3","ZH":"","TI":"","ME":"","LA":""}
+	},
+	{
+		"name":"A_100006","star":"1","atti":{"name":"口哨糖","SN":"1"},"unLock":{"grade":"1"},"consume":{"A":"","B":""},"rare":"1","features":{"DE":"-3","ZH":"","TI":"","ME":"","LA":""}
+	},
+	{
+		"name":"A_100007","star":"1","atti":{"name":"老鼠屎","SN":"1"},"unLock":{"grade":"1"},"consume":{"A":"","B":""},"rare":"1","features":{"DE":"-3","ZH":"","TI":"","ME":"","LA":""}
+	},
+	{
+		"name":"A_100008","star":"1","atti":{"name":"针线","SN":"1"},"unLock":{"grade":"1"},"consume":{"A":"","B":""},"rare":"1","features":{"DE":"-3","ZH":"","TI":"","ME":"","LA":""}
+	},
+	{
+		"name":"A_100009","star":"1","atti":{"name":"无花果","SN":"1"},"unLock":{"grade":"1"},"consume":{"A":"","B":""},"rare":"1","features":{"DE":"-3","ZH":"","TI":"","ME":"","LA":""}
+	},
+	{
+		"name":"A_100010","star":"1","atti":{"name":"棒棒冰","SN":"1"},"unLock":{"grade":"1"},"consume":{"A":"","B":""},"rare":"1","features":{"DE":"-3","ZH":"","TI":"","ME":"","LA":""}
+	},
+	{
+		"name":"A_100011","star":"1","atti":{"name":"冰砖","SN":"1"},"unLock":{"grade":"1"},"consume":{"A":"","B":""},"rare":"1","features":{"DE":"-3","ZH":"","TI":"","ME":"","LA":""}
+	},
+	{
+		"name":"A_100012","star":"1","atti":{"name":"玻璃珠","SN":"1"},"unLock":{"grade":"1"},"consume":{"A":"","B":""},"rare":"1","features":{"DE":"-3","ZH":"","TI":"","ME":"","LA":""}
+	},
+	{
+		"name":"A_100013","star":"1","atti":{"name":"干脆面","SN":"1"},"unLock":{"grade":"1"},"consume":{"A":"","B":""},"rare":"1","features":{"DE":"-3","ZH":"","TI":"","ME":"","LA":""}
+	},
+	{
+		"name":"A_100014","star":"1","atti":{"name":"红领巾","SN":"1"},"unLock":{"grade":"1"},"consume":{"A":"","B":""},"rare":"1","features":{"DE":"-3","ZH":"","TI":"","ME":"","LA":""}
+	},
+	{
+		"name":"A_100015","star":"1","atti":{"name":"小黄帽","SN":"1"},"unLock":{"grade":"1"},"consume":{"A":"","B":""},"rare":"1","features":{"DE":"-3","ZH":"","TI":"","ME":"","LA":""}
+	},
+	{
+		"name":"A_100016","star":"1","atti":{"name":"双星球鞋","SN":"1"},"unLock":{"grade":"1"},"consume":{"A":"","B":""},"rare":"1","features":{"DE":"-3","ZH":"","TI":"","ME":"","LA":""}
+	},
+	{
+		"name":"A_100017","star":"1","atti":{"name":"小白面","SN":"1"},"unLock":{"grade":"1"},"consume":{"A":"","B":""},"rare":"1","features":{"DE":"-3","ZH":"","TI":"","ME":"","LA":""}
+	},
+	{
+		"name":"A_100018","star":"1","atti":{"name":"辣条","SN":"1"},"unLock":{"grade":"1"},"consume":{"A":"","B":""},"rare":"1","features":{"DE":"-3","ZH":"","TI":"","ME":"","LA":""}
+	},
+	{
+		"name":"A_100019","star":"1","atti":{"name":"大大卷","SN":"1"},"unLock":{"grade":"1"},"consume":{"A":"","B":""},"rare":"1","features":{"DE":"-3","ZH":"","TI":"","ME":"","LA":""}
+	},
 ]
