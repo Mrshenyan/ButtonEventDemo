@@ -14,15 +14,26 @@ export default class signColor extends cc.Component {
         type:Boolean,
         tooltip:"是否转向",
     })
-    // TurnOrNot:Boolean=false;
-    // previousKey:number=0;
+    turndirection:Boolean=false;
+    @property(cc.Prefab)
+    bulletPre:cc.Prefab=null;
+    @property({
+        tooltip:"当前方向"
+    })
     curdirection="up";
+    bPool:cc.NodePool=null;
     keyClicked=false;
     upfalge=false;
     downfalge=false;
     leftfalge=false;
     rightfalge=false;
     onLoad(){
+        let poolLen = 10;
+        this.bPool = new cc.NodePool();
+        for(let i=0;i<poolLen;i++){
+            let bullet = cc.instantiate(this.bulletPre);
+            this.bPool.put(bullet);
+        }
         this.node.scale=0.25;
         this.drawIt();
         cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN,this.Control,this);
@@ -119,6 +130,10 @@ export default class signColor extends cc.Component {
                         this.curdirection = "right";
                         break;
                     }
+                    case cc.macro.KEY.f:{
+                        this.fire();
+                        break;
+                    }
                 }
                 break;
             }
@@ -139,6 +154,10 @@ export default class signColor extends cc.Component {
                     case cc.macro.KEY.right:{
                         this.node.rotation-=90;
                         this.curdirection = "right";
+                        break;
+                    }
+                    case cc.macro.KEY.f:{
+                        this.fire();
                         break;
                     }
                 }
@@ -163,6 +182,10 @@ export default class signColor extends cc.Component {
                     case cc.macro.KEY.right:{
                         break;
                     }
+                    case cc.macro.KEY.f:{
+                        this.fire();
+                        break;
+                    }
                 }
                 break;
             }
@@ -185,9 +208,26 @@ export default class signColor extends cc.Component {
                         this.node.x+=2;
                         break;
                     }
+                    case cc.macro.KEY.f:{
+                        this.fire();
+                        break;
+                    }
                 }
                 break;
             }
         }
+        console.log(this.curdirection);
+    }
+
+    fire(){
+        let bullet = null;
+        if(this.bPool.size()>0){
+            bullet = this.bPool.get();
+        }
+        else{
+            bullet = cc.instantiate(this.bulletPre);
+        }
+        bullet.parent = this.node;
+        bullet.getComponent("bulletPre").init();
     }
 }

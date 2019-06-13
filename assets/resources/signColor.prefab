@@ -798,7 +798,10 @@
     "rootNode": {
       "__id__": 1
     },
-    "curdirection": "up",
+    "turnfandation": false,
+    "bulletPre": {
+      "__uuid__": "9a5a614f-6c00-4fd5-9186-f4c43b338f58"
+    },
     "_id": ""
   },
   {

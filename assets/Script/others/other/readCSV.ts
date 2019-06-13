@@ -1,7 +1,7 @@
 const {ccclass, property} = cc._decorator;
 
 @ccclass
-export default class NewClass extends cc.Component {
+export default class readCSV extends cc.Component {
     @property(cc.Button)
     readBtn:cc.Button=null;
     @property(cc.Button)
