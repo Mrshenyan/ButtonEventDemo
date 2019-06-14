@@ -2,9 +2,10 @@ import triangle from "./Polygon/triangle";
 
 const {ccclass, property} = cc._decorator;
 
-@ccclass
-export default class NewClass extends cc.Component {
 
+@ccclass
+export default class DrawSys extends cc.Component {
+    static PI = Math.PI;
     @property({
         type:cc.Node,
         displayName:"panelNode",
@@ -27,6 +28,7 @@ export default class NewClass extends cc.Component {
         女:2
     }.未知;
 
+    isDraw=false;
     // LIFE-CYCLE CALLBACKS:
     sharp:triangle = triangle.instance;
     onLoad () {
@@ -39,7 +41,13 @@ export default class NewClass extends cc.Component {
 
 
     
-    // update (dt) {}
+    update (dt) {
+        // if(this.isDraw){
+        //     let Inode = cc.find("Canvas/I");
+        //     Inode.scaleX-=0.001;
+        //     Inode.scaleY-=0.001;
+        // }
+    }
 
 
     DrawPic(currentTarget){
@@ -57,7 +65,7 @@ export default class NewClass extends cc.Component {
                 break;
             }
             case "C":{
-                C();
+                C_1(100,100,100,100,100);
                 break;
             }
             case "D":{
@@ -134,8 +142,61 @@ export default class NewClass extends cc.Component {
                     new cc.Vec2(100+100*Math.cos(72*PI/180),100*Math.sin(72*PI/180)),
                     new cc.Vec2(50,50*Math.tan(72*PI/180)),
                     new cc.Vec2(-100*Math.cos(72*PI/180),100*Math.sin(72*PI/180)));
+                    self.isDraw = true;
 
         }
+
+        function C_1(a:number,b:number,c:number,d:number,e:number){
+            let pos_a = new cc.Vec2(0,a);
+            let pos_b = new cc.Vec2(b*Math.cos((18/180) * DrawSys.PI),b*Math.sin((18/180) * DrawSys.PI));
+            let pos_c = new cc.Vec2(c*Math.cos((54/180) * DrawSys.PI),-c*Math.sin((54/180) * DrawSys.PI));
+            let pos_d = new cc.Vec2(-d*Math.cos((54/180) * DrawSys.PI),-d*Math.sin((54/180) * DrawSys.PI));
+            let pos_e = new cc.Vec2(-e*Math.cos((18/180) * DrawSys.PI),b*Math.sin((18/180) * DrawSys.PI));
+            let tria = triangle.instance;
+            Draw(cc.find("Canvas/I"),pos_a,pos_b,pos_c,pos_d,pos_e);
+            // let drawtria = tria.Draw(cc.find("Canvas/I"),
+            //         pos_a,
+            //         pos_b,
+            //         pos_c,
+            //         pos_d,
+            //         pos_e
+            //         );
+            //         self.isDraw = true;
+            //         console.log(pos_a);
+            //         console.log(pos_b);
+            //         console.log(pos_c);
+            //         console.log(pos_d);
+            //         console.log(pos_e);
+
+        }
+
+        function Draw(node:cc.Node,...linePos:cc.Vec2[]):cc.Graphics{
+            // this.AlllinePos = linePos;
+            // this.edgeNum = linePos.length - 1;
+            let lineLen:number[] = [];
+            let tri = node.addComponent(cc.Graphics);
+            tri.moveTo(linePos[0].x,linePos[0].y);
+            for(let i=0;i<linePos.length;i++){
+                let len = Math.sqrt((Math.pow(linePos[i].x,2)+Math.pow(linePos[i].y,2)));
+                lineLen[i] = len;
+            }
+            for(let i=1;i<=linePos.length;i++){
+                if(i==linePos.length){
+                    tri.lineTo(linePos[0].x,linePos[0].y)
+                    // this.isClosed = true;
+                }
+                else{
+                    tri.lineTo(linePos[i].x,linePos[i].y);
+                }
+            }
+            tri.strokeColor = cc.Color.YELLOW;
+            tri.close();
+            tri.fillColor = new cc.Color(255,0,0,100);//create a color object dynamicly
+            tri.stroke();
+            tri.fill();
+            return tri;
+        }
+
         function D(){
 
         }
