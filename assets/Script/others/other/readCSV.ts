@@ -20,7 +20,7 @@ export default class readCSV extends cc.Component {
         let yyyy = parseInt(xxxx);
         console.log(yyyy);
         //以下是CVS文件读取并转换为数组存储。
-        cc.loader.loadRes("test2",function(err,res){
+        cc.loader.loadRes("Etable",function(err,res){
             if(err){
                 cc.error(err);
             }
