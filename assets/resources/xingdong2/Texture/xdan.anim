@@ -1,0 +1,68 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "xdan",
+  "_objFlags": 0,
+  "_native": "",
+  "_duration": 0.3333333333333333,
+  "sample": 60,
+  "speed": 1,
+  "wrapMode": 1,
+  "curveData": {
+    "paths": {
+      "xdan": {
+        "props": {
+          "scaleX": [],
+          "scaleY": [
+            {
+              "frame": 0,
+              "value": 1
+            },
+            {
+              "frame": 0.08333333333333333,
+              "value": 0.8
+            },
+            {
+              "frame": 0.25,
+              "value": 1.1
+            },
+            {
+              "frame": 0.3333333333333333,
+              "value": 1
+            }
+          ],
+          "position": [
+            {
+              "frame": 0,
+              "value": [
+                20,
+                -290
+              ]
+            },
+            {
+              "frame": 0.08333333333333333,
+              "value": [
+                20,
+                -303
+              ]
+            },
+            {
+              "frame": 0.25,
+              "value": [
+                20,
+                -282
+              ]
+            },
+            {
+              "frame": 0.3333333333333333,
+              "value": [
+                20,
+                -290
+              ]
+            }
+          ]
+        }
+      }
+    }
+  },
+  "events": []
+}
