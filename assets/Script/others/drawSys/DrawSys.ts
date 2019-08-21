@@ -57,7 +57,8 @@ export default class DrawSys extends cc.Component {
         console.log(touchName);
         switch(touchName){
             case "A":{
-                A();
+                // A();
+                ani()
                 break;
             }
             case "B":{
@@ -233,6 +234,45 @@ export default class DrawSys extends cc.Component {
         }
         function I(){
 
+        }
+
+        function ani(){
+            // var center = [ 300, 300 ];
+            self.PanelNode.getChildByName(touchName).removeComponent(cc.Graphics);
+            var ctx = self.PanelNode.getChildByName(touchName).addComponent(cc.Graphics);
+            ctx.lineWidth = 1;
+            let curveness = 0.7;
+            let start = cc.v2(100,100);
+            let end = cc.v2(0,0);
+            let percent=0.5;
+            var radius = 300;
+            let count = 10;
+        	// for ( var i = 0; i < count; i++ ) {
+        		var angle = Math.PI * 2 / count// * i;
+        		end.x = start.x + radius * Math.sin( angle );
+        		end.y = start.y + radius * Math.cos( angle );
+        		// ctx.strokeStyle = colors[ i ];
+				// ctx.beginPath();
+                Beizer(ctx,start,end,curveness,percent)
+            // }
+            ctx.stroke();
+            percent = (percent+1)%100;
+            if(percent==100){
+                percent=0;
+            }
+            // requestAnimationFrame(ani);
+        }
+        function Beizer(ctx,start,end,curveness,percent){
+            let cp = [
+                (start.x+end.x)/2 - (start.y-end.y)*curveness,
+                (start.y+end.y)/2 - (start.x-end.x)*curveness,
+            ];
+            ctx.moveTo(start.x,start.y);
+            for(let i=0;i<=percent/100;i+=0.01){
+                ctx.quadraticCurveTo(start.x,cp[0],end.x,i);
+                // ctx.quadraticCurveTo(start.y,cp[1],end.y,i);
+            }
+            ctx.stroke();
         }
 
     }

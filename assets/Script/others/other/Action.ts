@@ -6,6 +6,8 @@ export default class NewClass extends cc.Component {
     btns:cc.Prefab=null;
     @property(cc.Sprite)
     testSp:cc.Sprite=null;
+    @property(cc.Label)
+    lable:cc.Label = null;
 
     // onLoad () {}
 
@@ -23,6 +25,9 @@ export default class NewClass extends cc.Component {
                 cc.scaleBy(2,(1/1.5),(1/1.5)),
             ));
         },3);
+        console.log(this.lable.string.length);
+        console.log(this.lable.string.substring(0,1));
+        this.lable
     }
 
     // update (dt) {}
