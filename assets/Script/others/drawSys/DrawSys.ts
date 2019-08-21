@@ -101,20 +101,39 @@ export default class DrawSys extends cc.Component {
             // g.fillColor = cc.hexToColor('#ff0000');
             
             // a.arc(0, 0, 100, Math.PI/2, Math.PI, false);
-            a.moveTo(20,100);
-            a.lineTo(20,20);
-            a.lineTo(70,20);
-            a.lineTo(20,100);
-            a.strokeColor = cc.Color.YELLOW;
-            a.close();
+            // a.moveTo(20,100);
+            // a.lineTo(20,20);
+            // a.lineTo(70,20);
+            // a.lineTo(20,100);
+            // a.strokeColor = cc.Color.YELLOW;
+            // a.close();
             // a.moveTo(2,2);
             // a.bezierCurveTo(2,4,8,16,8,2);
             // a.close();
-            a.fillColor = cc.Color.RED;
-            a.stroke();
-            a.fill();
+            // a.fillColor = cc.Color.RED;
+            // a.stroke();
+            // a.fill();
 
             
+            let pos1 = cc.v2(100,100);
+            let pos2 = cc.v2(100,0)
+            let pos3 = cc.v2(200,0)
+            let pos4 = cc.v2(200,-100)
+            a.moveTo(pos1.x,pos1.y);
+            formulaBezier(pos1,pos2,pos3,pos4);
+            function formulaBezier(p1,p2,p3,p4){
+                    let pos:cc.Vec2=new cc.Vec2();
+                    console.log(a.node.position)
+                    for(let t=0;t<=1;t+=0.01){
+                        pos.x = p1.x*Math.pow((1-t),3)+3*p2.x*t*Math.pow((1-t),2)+3*p3.x*Math.pow(t,2)*(1-t)+p4.x*Math.pow(t,3);
+                        pos.y = p1.y*Math.pow((1-t),3)+3*p2.y*t*Math.pow((1-t),2)+3*p3.y*Math.pow(t,2)*(1-t)+p4.y*Math.pow(t,3);
+                        a.lineTo(pos.x,pos.y);
+                        console.log(pos);
+                    }
+                    // a.close();
+                    a.stroke();
+                a.strokeColor = cc.Color.YELLOW;
+            }
 
             // a.arc(-10, 10, 100, Math.PI/2, Math.PI, true);
             // a.lineTo(-10, 10);
