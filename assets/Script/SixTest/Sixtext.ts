@@ -5,7 +5,10 @@ export default class NewClass extends cc.Component {
 
     @property(cc.Prefab)
     cell: cc.Prefab = null;
-
+    @property(cc.Node)
+    RotateNode:cc.Node=null;
+    @property(cc.Prefab)
+    Shadow:cc.Prefab = null;
     Cell:cc.Node = null;
     CellPOS:cc.Vec2=new cc.Vec2(415,386);
     CellLine:number=87/Math.cos(Math.PI/6);
@@ -14,6 +17,11 @@ export default class NewClass extends cc.Component {
     onLoad(){
         this.Cell = cc.instantiate(this.cell);
         this.generaterCell();
+        let self = this;
+        this.RotateNode.on(cc.Node.EventType.TOUCH_START,()=>{
+            let shadow = cc.instantiate(self.Shadow);
+
+        })
     }
     //生成游戏区域
     generaterCell(){
@@ -119,7 +127,13 @@ export default class NewClass extends cc.Component {
         this.FindCell(tag);
     }
 
-    FindCell(tag){
+    
+    /**
+     * 一键消除，获取点击的单元格的周围游戏格。
+     * @param tag 被点击的单元格信息
+     * @param toolKind 使用的道具类型，1：一键消除，2：小导弹，3：强制合成
+     */
+    FindCell(tag,toolKind?){
         let lineNum = tag.n;
         let RowNum = tag.i;
         let CellSN = tag.count;
@@ -159,4 +173,12 @@ export default class NewClass extends cc.Component {
         }
         console.log(RoundSixCellNodes);
     }
+
+    /**
+     * 棋子生成函数，
+     */
+    generateChess(){
+
+    }
+
 }
