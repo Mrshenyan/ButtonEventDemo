@@ -200,9 +200,12 @@ export default class Helloworld extends cc.Component {
     SpCallBackEventMove3(event){
         let pos = event.touch._point;
         // pos = event.target.convertToWorldSpaceAR(pos);
-        
-        event.target.x = pos.x-480;
-        event.target.y = pos.y-320;
+        // let x = event.touch._point.position
+        // pos = this.node.convertToNodeSpaceAR(event.touch._point);
+        // console.log(event.touch._point);
+        // console.log(pos);
+        event.target.x = pos.x-cc.winSize.width/2;
+        event.target.y = pos.y-cc.winSize.height/2;
         // console.log(pos);
         // console.log(event.target);
     }
