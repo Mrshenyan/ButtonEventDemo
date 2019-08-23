@@ -13,10 +13,14 @@ export default class Sixtext extends cc.Component {
     Chesses:cc.Prefab[]=[];//数字的预制体
     @property(cc.Node)
     newGenedParentNode:cc.Node=null;
-    Cell:cc.Node = null;//游戏区域的游戏格子，在这个类中用于存放格子的预制体的实例化，在循环创建格子的时候被复制。
-    CellPOS:cc.Vec2=new cc.Vec2(415,386);//第一个六边形的位置
-    CellLine:number=87/Math.cos(Math.PI/6);//六边形单边长
-    allCellPos=new Array();//生成的游戏区域的格子的信息
+    /**游戏区域的游戏格子，在这个类中用于存放格子的预制体的实例化，在循环创建格子的时候被复制。 */
+    Cell:cc.Node = null;//
+    /**第一个六边形的位置 */
+    CellPOS:cc.Vec2=new cc.Vec2(415,386);//
+    /**六边形单边长 */
+    CellLine:number=87/Math.cos(Math.PI/6);//
+    /**生成的游戏区域的格子的信息 */
+    allCellPos=new Array();//
     thisProp:cc.Node=null;
     FilledGridCount:number=45;//被天上数字的格子数；
     ShoadowNode:cc.Node=null;
@@ -141,7 +145,7 @@ export default class Sixtext extends cc.Component {
 
 
     //转向
-    RotaFun(){
+    RotaFun(rotate1?){
         //tipNode是转圈节点
         //这里的this.node是生成的数字块的挂载节点：tmpWarp
         let tipNode:cc.Node = this.node.getChildByName('RotaNode');
@@ -153,12 +157,22 @@ export default class Sixtext extends cc.Component {
         //条件运算：前面条件不满足就不执行后面
         childs.length > 1 && childs.forEach(v => {
             //mul函数是系统函数：用于坐标分量乘上因子，所以因子不能丢，基本上是谁调用就用谁乘因子。也可以传入需要乘上的坐标参数
-            let p1 = v.position.mul(2);
-            //var tp = cc.pRotateByAngle(v.position, cc.v2(), -60 * Math.PI / 180);
-            //注：这里的rotate函数是旋转函数：参数是弧度，返回值是角度，注意与rotateTo和rotateBy函数区别
-            let tp = cc.v2(v.position).rotate(-60 * Math.PI / 180);
-            let p2 = tp.mul(2);
-            v.runAction(cc.bezierTo(.2, [p1, p2, tp]));
+            if(rotate1==undefined){
+                let p1 = v.position.mul(2);
+                //var tp = cc.pRotateByAngle(v.position, cc.v2(), -60 * Math.PI / 180);
+                //注：这里的rotate函数是旋转函数：参数是弧度，返回值是角度，注意与rotateTo和rotateBy函数区别
+                let tp = cc.v2(v.position).rotate(-60 * Math.PI / 180);
+                let p2 = tp.mul(2);
+                v.runAction(cc.bezierTo(.2, [p1, p2, tp]));
+            }
+            else{
+                let p1 = v.position.mul(2);
+                //var tp = cc.pRotateByAngle(v.position, cc.v2(), -60 * Math.PI / 180);
+                //注：这里的rotate函数是旋转函数：参数是弧度，返回值是角度，注意与rotateTo和rotateBy函数区别
+                let tp = rotate1;
+                let p2 = tp.mul(2);
+                v.runAction(cc.bezierTo(.2, [p1, p2, tp]));
+            }
         });
     }
 
@@ -223,6 +237,7 @@ export default class Sixtext extends cc.Component {
      * @param rotate 生成的初始角度
      */
     generateChess(count?,rotate?){
+        let self = this;
         let genedNumGridPos:Array<cc.Vec2>=new Array();
         if(!count){
             count = parseInt((Math.random() * 2).toString()) + 1, rotate = parseInt((Math.random() * 6).toString()) * 60;
@@ -264,6 +279,10 @@ export default class Sixtext extends cc.Component {
         }
     }
 
+    /**
+     * 移动函数
+     * @param event 
+     */
     Move(event){
         let self = this;
         let touchpos = event.touch.getDelta();
@@ -303,21 +322,14 @@ export default class Sixtext extends cc.Component {
         }
     }
 
+    /**
+     * 移动结束
+     * @param event 
+     */
     MoveEnd(event){
         if(!this.FilledGrid){
             this.RotateNode.setPosition(this.ariPos);
         }
-        // this.RotateNode.children.forEach(v => {
-        //     if(this.FilledPos[0]==null||this.FilledPos[0]==undefined){
-        //         this.RotateNode.setPosition(this.ariPos);
-        //     } 
-        //     else{
-        //         v.setPosition(0,0); 
-        //         this.RotateNode.children[i].parent = this.FilledPos[0]
-        //         this.FilledPos.pop();
-        //         this.RotateNode.setPosition(this.ariPos);
-        //     }
-        // });
         for(let i=0;i<this.FilledPos.length;i++){
             if(this.FilledPos[i]==null||this.FilledPos[i]==undefined){
                 this.RotateNode.setPosition(this.ariPos);
@@ -327,6 +339,7 @@ export default class Sixtext extends cc.Component {
                 this.RotateNode.children[i].parent = this.FilledPos[i]
                 this.FilledPos.shift();
                 i=-1;
+                this.FilledGridCount-=1;
                 this.RotateNode.setPosition(this.ariPos);
             }
         }
