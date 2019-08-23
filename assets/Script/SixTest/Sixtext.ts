@@ -22,6 +22,7 @@ export default class Sixtext extends cc.Component {
     ShoadowNode:cc.Node=null;
     ariPos:cc.Vec2=null;
     FilledGrid:boolean=false;
+    FilledPos=new Array(2);
     onLoad(){
         this.ShoadowNode = cc.instantiate(this.Shadow)
         this.ShoadowNode.active = false;
@@ -264,6 +265,7 @@ export default class Sixtext extends cc.Component {
     }
 
     Move(event){
+        let self = this;
         let touchpos = event.touch.getDelta();
         this.RotateNode.x += touchpos.x;
         this.RotateNode.y += touchpos.y;
@@ -274,46 +276,60 @@ export default class Sixtext extends cc.Component {
                 for(let j=0;j<this.allCellPos[i].length;j++){
                     let node = this.allCellPos[i][j][0];
                     let nodeworldpos = node.parent.convertToWorldSpaceAR(node.getPosition())
-
                     let theNode = this.RotateNode.children[n]
                     let vpos = theNode.parent.convertToWorldSpaceAR(theNode.getPosition());
-                    // console.log("nodeworldpos: "+nodeworldpos);
-                    // console.log("vpos: "+vpos);
                     let s = this.FilledGrid = alignPos(vpos,nodeworldpos,node,n,this.RotateNode.childrenCount);
                     if(s){
                         i=1,j=0;
                         break allCellLoop;
                     }
-                    // console.log(moveingPos);
                 }
             }
         }
         function alignPos(pos1,pos2,node,n,count):boolean{
-            // let gridPosdis = cc.v2().sub(pos1).mag();
-            // let dis = cc.v2().sub(pos2).mag();
             let v = new cc.Vec2(pos1.x-pos2.x,pos1.y-pos2.y)
             let det = cc.v2().sub(v).mag();;
             if(det<node.width/2){
                 node.getChildByName("shadow").active = true;
+                self.FilledPos[n] = node
                 return true;
-                // console.log("阴影");
             }
             else{
                 if((n!=1)||(count<2)){
                     node.getChildByName("shadow").active = false;
                 }
-                // else{
-                    
-                // }
                 return false;
             }
         }
-
     }
 
     MoveEnd(event){
         if(!this.FilledGrid){
             this.RotateNode.setPosition(this.ariPos);
         }
+        // this.RotateNode.children.forEach(v => {
+        //     if(this.FilledPos[0]==null||this.FilledPos[0]==undefined){
+        //         this.RotateNode.setPosition(this.ariPos);
+        //     } 
+        //     else{
+        //         v.setPosition(0,0); 
+        //         this.RotateNode.children[i].parent = this.FilledPos[0]
+        //         this.FilledPos.pop();
+        //         this.RotateNode.setPosition(this.ariPos);
+        //     }
+        // });
+        for(let i=0;i<this.FilledPos.length;i++){
+            if(this.FilledPos[i]==null||this.FilledPos[i]==undefined){
+                this.RotateNode.setPosition(this.ariPos);
+            }
+            else{
+                this.RotateNode.children[i].setPosition(0,0); 
+                this.RotateNode.children[i].parent = this.FilledPos[i]
+                this.FilledPos.shift();
+                i=-1;
+                this.RotateNode.setPosition(this.ariPos);
+            }
+        }
+        this.FilledGrid = false;
     }
 }
