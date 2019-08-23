@@ -206,6 +206,14 @@ export default class Helloworld extends cc.Component {
         // console.log(pos);
         event.target.x = pos.x-cc.winSize.width/2;
         event.target.y = pos.y-cc.winSize.height/2;
+        let spNode = cc.find("Canvas/sp/sp");
+        let sppos = spNode.convertToWorldSpaceAR(spNode.getPosition());
+        let targetPos = event.target.convertToWorldSpaceAR(event.target.getPosition());
+        let poss = new cc.Vec2(sppos.x-targetPos.x,sppos.y-targetPos.y);
+        let dis = cc.v2().sub(poss).mag();
+        console.log("sppos:"+sppos);
+        console.log("targetPos:"+targetPos);
+        console.log("dis: "+dis);
         // console.log(pos);
         // console.log(event.target);
     }
@@ -239,11 +247,14 @@ export default class Helloworld extends cc.Component {
         let self = this;
         let sp1 = event.target;
         let parent = sp1.parent;
+        let spNode = cc.find("Canvas/sp/sp");
+        let sppos = spNode.convertToWorldSpaceAR(spNode.getPosition());
+        let targetPos = event.target.convertToWorldSpaceAR(event.target.getPosition());
         // event.bubbles = false;
-        console.log(event);
-        console.log(event.target);
-        console.log(parent);
-        console.log("plase call me Sp3");
+        // console.log("sppos:"+sppos);
+        // console.log("targetPos:"+targetPos);
+        // console.log(parent);
+        // console.log("plase call me Sp3");
     }
 
     LinkNet(){

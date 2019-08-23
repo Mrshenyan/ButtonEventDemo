@@ -19,7 +19,12 @@ export default class Sixtext extends cc.Component {
     allCellPos=new Array();//生成的游戏区域的格子的信息
     thisProp:cc.Node=null;
     FilledGridCount:number=45;//被天上数字的格子数；
+    ShoadowNode:cc.Node=null;
+    ariPos:cc.Vec2=null;
+    FilledGrid:boolean=false;
     onLoad(){
+        this.ShoadowNode = cc.instantiate(this.Shadow)
+        this.ShoadowNode.active = false;
         this.Cell = cc.instantiate(this.cell);
         this.generaterCell();
         let self = this;
@@ -28,6 +33,9 @@ export default class Sixtext extends cc.Component {
 
         })
         this.RotateNode.on(cc.Node.EventType.TOUCH_MOVE,this.Move,this);
+        this.RotateNode.on(cc.Node.EventType.TOUCH_END,this.MoveEnd,this);
+        this.RotateNode.zIndex=10;
+        this.ariPos = this.RotateNode.getPosition(); 
     }
     //生成游戏区域
     generaterCell(){
@@ -54,6 +62,10 @@ export default class Sixtext extends cc.Component {
 
                     cellPos.y = this.CellPOS.y - 3*this.CellLine*(n-1)/2;
                     newCell.setPosition(cellPos);
+                    let shadownode = cc.instantiate(this.ShoadowNode);
+                    if(!newCell.getChildByName("shadow")){
+                        newCell.addChild(shadownode);
+                    }
                     this.node.addChild(newCell);
                     j++;
                     let attr={tag:{n,i,count}};
@@ -66,10 +78,6 @@ export default class Sixtext extends cc.Component {
                     this.allCellPos[n][count]["SN"].push(i);
                     this.allCellPos[n][count]["SN"].push(count);
                     this.allCellPos[n][count].isFilled = false;
-                    // this.allCellPos.prototype.isFill = false;
-                    // let isfill = new addProtot(this.allCellPos);
-                    // addProtot.prototype.isFilled = false;
-                    // isfill.isFilled = false;
                     count++;
                 }
             }
@@ -98,6 +106,10 @@ export default class Sixtext extends cc.Component {
                         cellPos.y = this.CellPOS.y - 1.5*this.CellLine*(n-1);
                         newCell.setPosition(cellPos);
                         newCell.on(cc.Node.EventType.TOUCH_START,this.CellClickCallBack,this,false);
+                        let shadownode = cc.instantiate(this.ShoadowNode);
+                        if(!newCell.getChildByName("shadow")){
+                            newCell.addChild(shadownode);
+                        }
                         this.node.addChild(newCell);
                         j++;
                         let attr={tag:{n,i,count}};
@@ -255,6 +267,53 @@ export default class Sixtext extends cc.Component {
         let touchpos = event.touch.getDelta();
         this.RotateNode.x += touchpos.x;
         this.RotateNode.y += touchpos.y;
+        RotateLoop:
+        for(let n=0;n<this.RotateNode.childrenCount;n++){
+            allCellLoop:
+            for(let i=1;i<this.allCellPos.length;i++){
+                for(let j=0;j<this.allCellPos[i].length;j++){
+                    let node = this.allCellPos[i][j][0];
+                    let nodeworldpos = node.parent.convertToWorldSpaceAR(node.getPosition())
 
+                    let theNode = this.RotateNode.children[n]
+                    let vpos = theNode.parent.convertToWorldSpaceAR(theNode.getPosition());
+                    // console.log("nodeworldpos: "+nodeworldpos);
+                    // console.log("vpos: "+vpos);
+                    let s = this.FilledGrid = alignPos(vpos,nodeworldpos,node,n,this.RotateNode.childrenCount);
+                    if(s){
+                        i=1,j=0;
+                        break allCellLoop;
+                    }
+                    // console.log(moveingPos);
+                }
+            }
+        }
+        function alignPos(pos1,pos2,node,n,count):boolean{
+            // let gridPosdis = cc.v2().sub(pos1).mag();
+            // let dis = cc.v2().sub(pos2).mag();
+            let v = new cc.Vec2(pos1.x-pos2.x,pos1.y-pos2.y)
+            let det = cc.v2().sub(v).mag();;
+            if(det<node.width/2){
+                node.getChildByName("shadow").active = true;
+                return true;
+                // console.log("阴影");
+            }
+            else{
+                if((n!=1)||(count<2)){
+                    node.getChildByName("shadow").active = false;
+                }
+                // else{
+                    
+                // }
+                return false;
+            }
+        }
+
+    }
+
+    MoveEnd(event){
+        if(!this.FilledGrid){
+            this.RotateNode.setPosition(this.ariPos);
+        }
     }
 }
