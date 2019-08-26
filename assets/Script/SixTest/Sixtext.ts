@@ -159,19 +159,21 @@ export default class Sixtext extends cc.Component {
             //mul函数是系统函数：用于坐标分量乘上因子，所以因子不能丢，基本上是谁调用就用谁乘因子。也可以传入需要乘上的坐标参数
             if(rotate1==undefined){
                 let p1 = v.position.mul(2);
-                //var tp = cc.pRotateByAngle(v.position, cc.v2(), -60 * Math.PI / 180);
                 //注：这里的rotate函数是旋转函数：参数是弧度，返回值是角度，注意与rotateTo和rotateBy函数区别
                 let tp = cc.v2(v.position).rotate(-60 * Math.PI / 180);
                 let p2 = tp.mul(2);
                 v.runAction(cc.bezierTo(.2, [p1, p2, tp]));
+                // v.setPosition(tp)
             }
             else{
+                // //注：这里的rotate函数是旋转函数：参数是弧度，返回值是角度，注意与rotateTo和rotateBy函数区别
                 let p1 = v.position.mul(2);
-                //var tp = cc.pRotateByAngle(v.position, cc.v2(), -60 * Math.PI / 180);
                 //注：这里的rotate函数是旋转函数：参数是弧度，返回值是角度，注意与rotateTo和rotateBy函数区别
-                let tp = rotate1;
+                let tp = cc.v2(v.position).rotate(-60 * Math.PI / 180);
                 let p2 = tp.mul(2);
                 v.runAction(cc.bezierTo(.2, [p1, p2, tp]));
+                //tp是旋转之后的坐标。
+                // v.setPosition(tp)
             }
         });
     }
@@ -236,12 +238,15 @@ export default class Sixtext extends cc.Component {
      * @param count 需要生成的个数
      * @param rotate 生成的初始角度
      */
-    generateChess(count?,rotate?){
+    generateChess(){
         let self = this;
-        let genedNumGridPos:Array<cc.Vec2>=new Array();
+        let count=0;
+        let rotate=0;
+        let genedNumGrid:Array<cc.Node>=new Array();
         if(!count){
             count = parseInt((Math.random() * 2).toString()) + 1, rotate = parseInt((Math.random() * 6).toString()) * 60;
         }
+        rotate = parseInt((Math.random() * 6).toString()) * 60
         this.newGenedParentNode.removeAllChildren();//该节点是新生成的棋子的父节点
         //生成棋子的时候需要判断游戏区域剩余的空格数
         switch(this.FilledGridCount){
@@ -255,27 +260,46 @@ export default class Sixtext extends cc.Component {
             }
             default:{//generate two number grid
                 console.log("generate two number grid");
+                geneFun();
                 break;
             }
         }
         function geneFun(){
             let geneID=[0,1,2,3,4,5];
+            let genePos=new Array<cc.Vec2>(2);
             if(!count||count==1){
-                genedNumGridPos.push(new cc.Vec2(0,0));
+                let id = parseInt((Math.random()*geneID.length).toString());
+                genedNumGrid[0] = cc.instantiate(self.Chesses[geneID[id]]);
+                geneID.splice(id,1)
+                genePos[0]=genedNumGrid[0].position.rotate(rotate);
                 // let 
             }
             else{
-                let pos = new cc.Vec2(-100,0);
-                let Rota = 0 * Math.PI/180;
-                let pos1Rota = pos.rotate(Rota)
-                let pos2Rota = pos.rotate(Rota-Math.PI);
-                genedNumGridPos.push(pos1Rota);
-                genedNumGridPos.push(pos2Rota);
-            }
-            genedNumGridPos.forEach(v=>{
+                console.log(geneID);
                 let id = parseInt((Math.random()*geneID.length).toString());
-
-            });
+                genedNumGrid[0] = cc.instantiate(self.Chesses[geneID[id]]);
+                geneID.splice(id,1)
+                console.log("id: "+id);
+                console.log(geneID);
+                id = parseInt((Math.random()*geneID.length).toString());
+                genedNumGrid[1] = cc.instantiate(self.Chesses[geneID[id]]);
+                geneID.splice(id,1)
+                console.log("id: "+id);
+                console.log(geneID);
+                genedNumGrid[0].x=99;
+                genedNumGrid[1].x=-99
+                genePos[0]=genedNumGrid[0].position.rotate(rotate*Math.PI/180);
+                genePos[1]=genedNumGrid[1].position.rotate(rotate*Math.PI/180);
+            }
+            for(let i=genedNumGrid.length-1;i>=0;i--){
+                if(genedNumGrid[i]==undefined||genedNumGrid[i]==null){
+                    continue;
+                }
+                else{
+                    genedNumGrid[i].setPosition(genePos[i]);
+                    self.newGenedParentNode.addChild(genedNumGrid[i]);
+                }
+            }
         }
     }
 
