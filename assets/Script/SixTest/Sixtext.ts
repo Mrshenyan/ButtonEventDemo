@@ -319,7 +319,7 @@ export default class Sixtext extends cc.Component {
                 genedNumGrid[0].attr(attr);
                 num.theNum = geneID[id]+1;
                 genedNumGrid[0].attr(num);
-                console.log("生成的是："+num.theNum);
+                // console.log("生成的是："+num.theNum);
                 geneID.splice(id,1)
                 genePos[0]=genedNumGrid[0].position.rotate(rotate);
                 // let 
@@ -331,7 +331,7 @@ export default class Sixtext extends cc.Component {
                 genedNumGrid[0].attr(attr);
                 num.theNum = geneID[id]+1;
                 genedNumGrid[0].attr(num);
-                console.log("生成的是："+num.theNum);
+                // console.log("生成的是："+num.theNum);
                 geneID.splice(id,1)
                 // console.log("id: "+id);
                 // console.log(geneID);
@@ -339,7 +339,7 @@ export default class Sixtext extends cc.Component {
                 genedNumGrid[1] = cc.instantiate(self.Chesses[geneID[id]]);
                 genedNumGrid[1].attr(attr);
                 num.theNum = geneID[id]+1;
-                console.log("生成的是："+num.theNum);
+                // console.log("生成的是："+num.theNum);
                 genedNumGrid[1].attr(num);
                 geneID.splice(id,1)
                 // console.log("id: "+id);
@@ -454,9 +454,10 @@ export default class Sixtext extends cc.Component {
      * @param tag 数字在游戏区域的位置
      * 消除函数
      */
-    Eliminate(tag:{n,row,sn}){
+    Eliminate(tag:{n,row,sn}){//这里有个逻辑问题
         // console.log(tag);
         let ArroundNodes = this.FindCell(tag);
+        let self = this;
         // console.log(ArroundNodes);//最后一个是自身;
         // console.log(this.allCellPos);
         let leftNode=this.allCellPos[tag.n][tag.sn-1],rightNode=this.allCellPos[tag.n][tag.sn+1];
@@ -469,7 +470,8 @@ export default class Sixtext extends cc.Component {
             downLeftNode = this.allCellPos[tag.n+1][tag.sn]
             downRightNode = this.allCellPos[tag.n+1][tag.sn+1];
         }
-        let leftIsFilled,rightIsFilled,downLeftIsFilled,downRightIsFilled;//左，右，左下，右下,0表示为空，可以填入数字
+        /** 左，右，左下，右下,0表示为空，可以填入数字*/
+        let leftIsFilled,rightIsFilled,downLeftIsFilled,downRightIsFilled;
         if(leftNode==undefined){
             leftIsFilled=0b1111;
         }
@@ -514,78 +516,108 @@ export default class Sixtext extends cc.Component {
                 downRightIsFilled=0b0100;
             }
         }
-        
-        // console.log("leftIsFilled: "+leftIsFilled)
-        // console.log("rightIsFilled: "+rightIsFilled)
-        // console.log("downFeftIsFilled: "+downLeftIsFilled)
-        // console.log("downRightIsFilled: "+downRightIsFilled)
-        let allFourCellFill:number=0b1111;
         let LPulsR = leftIsFilled+rightIsFilled;
         let x = LPulsR|0b0000//按位于之后结果为0表示左右都有空，即不需要消除
         if(!x){
             console.log("X: "+x);
             console.log("不需要消除")
+            self.generateChess();
         }else{
             switch(x){
                 case 0b0010:{
                     console.log("左");
-                    if(theNode[0].children[1].theNum==leftNode[0].children[1].theNum){
-                        console.log("相等，可以相消");
-                        if(!downLeftIsFilled){
-                            console.log("左下是空的，可以填入");
-                        }else{
-                            console.log("左下不是空的，直接消除");
-                        }
-                    }else{
-                        console.log("不相等，不可以相消");
-                    }
+                    subElinate(theNode[0].children[1],leftNode[0].children[1],downLeftIsFilled);
                     break;
                 }
                 case 0b0001:{
                     console.log("右");
-                    if(theNode[0].children[1].theNum==rightNode[0].children[1].theNum){
-                        console.log("相等，可以相消");
-                        if(!downRightIsFilled){
-                            console.log("左下是空的，可以填入");
-                        }else{
-                            console.log("左下不是空的，直接消除");
-                        }
-                    }else{
-                        console.log("不相等，不可以相消");
-                    }
+                    subElinate(theNode[0].children[1],rightNode[0].children[1],downRightIsFilled);
                     break;
                 }
                 case 0b0011:{
                     console.log("左右");
+                    let lorR = Math.random();
+                    if(lorR<0.5){//需要进一步判断左右数字是否相等，
+                        if(theNode[0].children[1],leftNode[0].theNum==leftNode[0].children[1].theNum){
+                            if(!downLeftIsFilled&&downLeftIsFilled<5){
+                                subElinate(theNode[0].children[1],leftNode[0].children[1],downLeftIsFilled,true);
+                            }else if(!downRightIsFilled&&downRightIsFilled<5){
+                                subElinate(theNode[0].children[1],rightNode[0].children[1],downRightIsFilled,true);
+                            }
+                            else {
+                                console.log("左右都没");
+                            }
+                        }else if(theNode[0].children[1],leftNode[0].theNum==rightNode[0].children[1].theNum){
+                            //有点问题
+                        }
+                    }
+                    else{
+                        if(!downRightIsFilled&&downRightIsFilled<5){
+                            subElinate(theNode[0].children[1],leftNode[0].children[1],downLeftIsFilled,true);
+                        }else if(!downLeftIsFilled&&downLeftIsFilled<5){
+                            subElinate(theNode[0].children[1],rightNode[0].children[1],downRightIsFilled,true);
+                        }
+                        else {
+                            console.log("左右都没");
+                        }
+                    }
                     break;
                 }
                 default:{
-                    if(leftIsFilled&&leftIsFilled<5){
-                        console.log("最右端，左有数字");
-                        if(theNode[0].children[1].theNum==leftNode[0].children[1].theNum){
-                            console.log("相等，可以相消");
-                            if(!downLeftIsFilled){
-                                console.log("左下是空的，可以填入");
-                            }else{
-                                console.log("左下不是空的，直接消除");
-                            }
-                        }else{
-                            console.log("不相等，不可以相消");
+                    if(leftIsFilled&&leftIsFilled>5){
+                        console.log("最左端");
+                        if(rightIsFilled){
+                            subElinate(theNode[0].children[1],rightNode[0].children[1],downRightIsFilled);
+                        }
+                        else{
+                            //边界情况，为空直接重新生成
+                            self.generateChess();
                         }
                     }
-                    else if(rightIsFilled&&rightIsFilled<5){
-                        console.log("最左端，右有数字");
-                        if(theNode[0].children[1].theNum==rightNode[0].children[1].theNum){
-                            console.log("相等，可以相消");
-                            if(!downRightIsFilled){
-                                console.log("左下是空的，可以填入");
-                            }else{
-                                console.log("左下不是空的，直接消除");
-                            }
-                        }else{
-                            console.log("不相等，不可以相消");
+                    else if(rightIsFilled&&rightIsFilled>5){
+                        console.log("最右端");
+                        if(leftIsFilled){
+                            subElinate(theNode[0].children[1],leftNode[0].children[1],downLeftIsFilled);
+                        }
+                        else{
+                            //边界情况，为空直接重新生成
+                            self.generateChess();
                         }
                     }
+                }
+            }
+        }
+
+        /**
+         * 
+         * @param node1 当前棋子
+         * @param node2 左或右棋子
+         * @param downFilled 左下或右下游戏格
+         * @param both 是否左右都有棋子
+         */
+        function subElinate(node1,node2,downFilled,both?:boolean){
+            if(both==undefined){
+                if(node1.theNum==node2.theNum){
+                    console.log("相等，可以相消");
+                    if(!downFilled){
+                        console.log("下是空的，可以填入");
+                        let addNum = node1.theNum+node2.theNum;
+                    }else{
+                        console.log("下不是空的，直接消除");
+                        let addNum = node1.theNum+node2.theNum;
+                    }
+                }else{
+                    console.log("不相等，不可以相消");
+                }
+                self.generateChess();
+            }else{
+                console.log("相等，可以相消");
+                if(!downFilled){
+                    console.log("下是空的，可以填入");
+                    let addNum = node1.theNum+node2.theNum;
+                }else{
+                    console.log("下不是空的，直接消除");
+                    let addNum = node1.theNum+node2.theNum;
                 }
             }
         }
