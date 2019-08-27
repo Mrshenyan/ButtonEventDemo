@@ -537,30 +537,7 @@ export default class Sixtext extends cc.Component {
                 case 0b0011:{
                     console.log("左右");
                     let lorR = Math.random();
-                    if(lorR<0.5){//需要进一步判断左右数字是否相等，
-                        if(theNode[0].children[1],leftNode[0].theNum==leftNode[0].children[1].theNum){
-                            if(!downLeftIsFilled&&downLeftIsFilled<5){
-                                subElinate(theNode[0].children[1],leftNode[0].children[1],downLeftIsFilled,true);
-                            }else if(!downRightIsFilled&&downRightIsFilled<5){
-                                subElinate(theNode[0].children[1],rightNode[0].children[1],downRightIsFilled,true);
-                            }
-                            else {
-                                console.log("左右都没");
-                            }
-                        }else if(theNode[0].children[1],leftNode[0].theNum==rightNode[0].children[1].theNum){
-                            //有点问题
-                        }
-                    }
-                    else{
-                        if(!downRightIsFilled&&downRightIsFilled<5){
-                            subElinate(theNode[0].children[1],leftNode[0].children[1],downLeftIsFilled,true);
-                        }else if(!downLeftIsFilled&&downLeftIsFilled<5){
-                            subElinate(theNode[0].children[1],rightNode[0].children[1],downRightIsFilled,true);
-                        }
-                        else {
-                            console.log("左右都没");
-                        }
-                    }
+                    LorRElinate(lorR);
                     break;
                 }
                 default:{
@@ -618,6 +595,33 @@ export default class Sixtext extends cc.Component {
                 }else{
                     console.log("下不是空的，直接消除");
                     let addNum = node1.theNum+node2.theNum;
+                }
+            }
+        }
+
+        function LorRElinate(lorR){
+            if(lorR<0.5){//需要进一步判断左右数字是否相等，
+                if(theNode[0].children[1],leftNode[0].theNum==leftNode[0].children[1].theNum){
+                    if(!downLeftIsFilled&&downLeftIsFilled<5){
+                        subElinate(theNode[0].children[1],leftNode[0].children[1],downLeftIsFilled,true);
+                    }else if(!downRightIsFilled&&downRightIsFilled<5){
+                        subElinate(theNode[0].children[1],rightNode[0].children[1],downRightIsFilled,true);
+                    }
+                    else {
+                        console.log("左右都没");
+                    }
+                }else if(theNode[0].children[1],leftNode[0].theNum==rightNode[0].children[1].theNum){
+                    //有点问题
+                }
+            }
+            else{
+                if(!downRightIsFilled&&downRightIsFilled<5){
+                    subElinate(theNode[0].children[1],leftNode[0].children[1],downLeftIsFilled,true);
+                }else if(!downLeftIsFilled&&downLeftIsFilled<5){
+                    subElinate(theNode[0].children[1],rightNode[0].children[1],downRightIsFilled,true);
+                }
+                else {
+                    console.log("左右都没");
                 }
             }
         }
