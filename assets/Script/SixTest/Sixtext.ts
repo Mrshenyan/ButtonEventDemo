@@ -22,7 +22,7 @@ export default class Sixtext extends cc.Component {
     CellLine:number=87/Math.cos(Math.PI/6);//
     /**生成的游戏区域的格子的信息 */
     allCellPos=new Array();//
-    thisProp:cc.Node=null;
+    // thisProp:cc.Node=null;
     FilledGridCount:number=45;//被天上数字的格子数；
     ShoadowNode:cc.Node=null;
     ariPos:cc.Vec2=null;
@@ -580,9 +580,16 @@ export default class Sixtext extends cc.Component {
                     if(!downFilled){
                         console.log("下是空的，可以填入");
                         let addNum = node1.theNum+node2.theNum;
+                        let pos = node1.getPosition();
+                        let tag = node1.tag;
+                        self.EliminateGene(node1.parent,node2.parent,addNum,pos);
+
                     }else{
                         console.log("下不是空的，直接消除");
                         let addNum = node1.theNum+node2.theNum;
+                        let pos = node1.getPosition();
+                        let tag = node1.tag;
+                        self.EliminateGene(node1.parent,node2.parent,addNum);
                     }
                 }else{
                     console.log("不相等，不可以相消");
@@ -593,16 +600,26 @@ export default class Sixtext extends cc.Component {
                 if(!downFilled){
                     console.log("下是空的，可以填入");
                     let addNum = node1.theNum+node2.theNum;
+                    let pos = node1.getPosition();
+                    // let tag = node1.tag;
+                    self.EliminateGene(node1.parent,node2.parent,addNum,pos);
                 }else{
                     console.log("下不是空的，直接消除");
                     let addNum = node1.theNum+node2.theNum;
+                    // let pos = node1.getPosition();
+                    // let tag = node1.tag;
+                    self.EliminateGene(node1.parent,node2.parent,addNum);
                 }
             }
         }
 
+        /**
+         * 左右都可以消除的时候的判断
+         * @param lorR 判断左右
+         */
         function LorRElinate(lorR){
             if(lorR<0.5){//需要进一步判断左右数字是否相等，
-                if(theNode[0].children[1],leftNode[0].theNum==leftNode[0].children[1].theNum){
+                if(theNode[0].children[1].theNum==leftNode[0].children[1].theNum){
                     if(!downLeftIsFilled&&downLeftIsFilled<5){
                         subElinate(theNode[0].children[1],leftNode[0].children[1],downLeftIsFilled,true);
                     }else if(!downRightIsFilled&&downRightIsFilled<5){
@@ -611,36 +628,62 @@ export default class Sixtext extends cc.Component {
                     else {
                         console.log("左右都没");
                     }
-                }else if(theNode[0].children[1],leftNode[0].theNum==rightNode[0].children[1].theNum){
+                }else if(theNode[0].children[1].theNum==rightNode[0].children[1].theNum){
                     //有点问题
+                    if(!downRightIsFilled&&downRightIsFilled<5){
+                        subElinate(theNode[0].children[1],rightNode[0].children[1],downRightIsFilled,true);
+                    }else if(!downLeftIsFilled&&downLeftIsFilled<5){
+                        subElinate(theNode[0].children[1],leftNode[0].children[1],downLeftIsFilled,true);
+                    }
+                    else {
+                        console.log("左右都没");
+                    }
                 }
             }
             else{
-                if(theNode[0].children[1],leftNode[0].theNum==leftNode[0].children[1].theNum){
+                if(theNode[0].children[1].theNum==rightNode[0].children[1].theNum){
                     if(!downRightIsFilled&&downRightIsFilled<5){
-                        subElinate(theNode[0].children[1],leftNode[0].children[1],downLeftIsFilled,true);
+                        subElinate(theNode[0].children[1],rightNode[0].children[1],downRightIsFilled,true);
                     }else if(!downLeftIsFilled&&downLeftIsFilled<5){
+                        subElinate(theNode[0].children[1],leftNode[0].children[1],downLeftIsFilled,true);
+                    }
+                    else {
+                        console.log("左右都没");
+                    }
+                }else if(theNode[0].children[1].theNum==leftNode[0].children[1].theNum){
+                    //有点问题
+                    if(!downLeftIsFilled&&downLeftIsFilled<5){
+                        subElinate(theNode[0].children[1],leftNode[0].children[1],downLeftIsFilled,true);
+                    }else if(!downRightIsFilled&&downRightIsFilled<5){
                         subElinate(theNode[0].children[1],rightNode[0].children[1],downRightIsFilled,true);
                     }
                     else {
                         console.log("左右都没");
                     }
-                }else if(theNode[0].children[1],leftNode[0].theNum==rightNode[0].children[1].theNum){
-                    //有点问题
                 }
             }
         }
     }
 
     /**
-     * 消除后生成数字格函数
+     * 消除后生成数字格函数,这里可以直接传入位置的左边，也可以传入行位置列位置，后者需要进一步处理
+     * 注意：pos不是必须的，在直接消除的时候不需要传入坐标参数
+     * @param node1 当前fu节点
+     * @param node2 当前节点的相邻节点
      * @param Addnum 相加之后的数字大小
      * @param pos 新生成的数字的位置
      */
-    EliminateGene(Addnum,pos){
+    EliminateGene(node1,node2,Addnum,pos?){
         let addedNode = cc.instantiate(this.Cell);
-        /**用于加载 */
+        /**用于加载新生成的颜色 */
         let colorNum = Addnum - parseInt((Addnum/3).toString());
-        
+        node1.isFilled=false;
+        node2.isFilled=false;
+        node1.removeChild(node1.children[1]);
+        node2.removeChild(node2.children[1]);
+        node1.getChildByName("shadow").active=false;
+        node2.getChildByName("shadow").active=false;
+    //     node1.parent.isFilled = false;
+    //     node2.parent.isFilled = false;
     }
 }
