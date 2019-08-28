@@ -3,6 +3,7 @@ const {ccclass, property} = cc._decorator;
 @ccclass
 export default class Sixtext extends cc.Component {
 
+    /** 格子的预制体*/
     @property(cc.Prefab)
     cell: cc.Prefab = null;//格子的预制体
     @property(cc.Node)
@@ -629,5 +630,16 @@ export default class Sixtext extends cc.Component {
                 }
             }
         }
+    }
+
+    /**
+     * 消除后生成数字格函数
+     * @param Addnum 相加之后的数字大小
+     */
+    EliminateGene(Addnum){
+        let addedNode = cc.instantiate(this.Cell);
+        /**用于加载 */
+        let colorNum = Addnum - parseInt((Addnum/3).toString());
+        
     }
 }
