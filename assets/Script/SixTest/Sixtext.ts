@@ -615,13 +615,17 @@ export default class Sixtext extends cc.Component {
                 }
             }
             else{
-                if(!downRightIsFilled&&downRightIsFilled<5){
-                    subElinate(theNode[0].children[1],leftNode[0].children[1],downLeftIsFilled,true);
-                }else if(!downLeftIsFilled&&downLeftIsFilled<5){
-                    subElinate(theNode[0].children[1],rightNode[0].children[1],downRightIsFilled,true);
-                }
-                else {
-                    console.log("左右都没");
+                if(theNode[0].children[1],leftNode[0].theNum==leftNode[0].children[1].theNum){
+                    if(!downRightIsFilled&&downRightIsFilled<5){
+                        subElinate(theNode[0].children[1],leftNode[0].children[1],downLeftIsFilled,true);
+                    }else if(!downLeftIsFilled&&downLeftIsFilled<5){
+                        subElinate(theNode[0].children[1],rightNode[0].children[1],downRightIsFilled,true);
+                    }
+                    else {
+                        console.log("左右都没");
+                    }
+                }else if(theNode[0].children[1],leftNode[0].theNum==rightNode[0].children[1].theNum){
+                    //有点问题
                 }
             }
         }
