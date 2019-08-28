@@ -631,8 +631,9 @@ export default class Sixtext extends cc.Component {
     /**
      * 消除后生成数字格函数
      * @param Addnum 相加之后的数字大小
+     * @param pos 新生成的数字的位置
      */
-    EliminateGene(Addnum){
+    EliminateGene(Addnum,pos){
         let addedNode = cc.instantiate(this.Cell);
         /**用于加载 */
         let colorNum = Addnum - parseInt((Addnum/3).toString());
