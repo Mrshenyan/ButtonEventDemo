@@ -686,4 +686,10 @@ export default class Sixtext extends cc.Component {
     //     node1.parent.isFilled = false;
     //     node2.parent.isFilled = false;
     }
+
+
+
+    ShareFun(){
+        let self = this;
+    }
 }
