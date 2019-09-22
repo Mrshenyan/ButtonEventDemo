@@ -45,10 +45,11 @@ export default class Sixtext extends cc.Component {
     //生成游戏区域
     generaterCell(){
         let self = this;
+        
         let a = Math.pow(4,0.5);
         let j=-1;
         let gap=20;
-        for(let n=1;n<10;n++){
+        for(let n=1;n<6;n++){
             let i=0;
             let limit=Math.floor((n-1)/2);
             let remainder = (n/2) - parseInt((n/2).toString());
