@@ -16,23 +16,16 @@ export default class NewClass extends cc.Component {
     // onLoad () {}
     poses=new Array();
     start () {
-<<<<<<< HEAD
         let pos1 = cc.v2(100,100);
         let pos2 = cc.v2(200,200)
         let pos3 = cc.v2(300,300)
         let pos4 = cc.v2(400,400)
         // let pos=[cc.v2(0, 299), cc.v2(300, -222), cc.v2(300, 100)]
-=======
-        let self = this;
-        let pos1 = cc.v2(200,400);
-        let pos2 = cc.v2(400,-100)
->>>>>>> 5cd1ff3632679380d8f3dfd1d3443b9fb9d315f0
         let pos=[];
         pos.push(pos1)
         pos.push(pos2);
         pos.push(pos1)
         pos.push(pos2)
-<<<<<<< HEAD
         // let bezierAction = cc.bezierTo(2,pos);
         // let bact = bezierAction.easing(cc.easeInOut(10));
         // this.BezierNode.runAction(bact);
@@ -62,8 +55,7 @@ export default class NewClass extends cc.Component {
             this.BezierNode.runAction(cc.moveTo(1,pos));
             console.log(pos);
         }
-=======
-        self.squareBezier(cc.v2(20,20),cc.v2(44,4),cc.v2(43,78),cc.v2(20,50));
+        this.squareBezier(cc.v2(20,20),cc.v2(44,4),cc.v2(43,78),cc.v2(20,50));
         
     }
 
@@ -119,7 +111,6 @@ export default class NewClass extends cc.Component {
         posa.y = Math.random()*150;
         posd.x = Math.random()*150;
         posd.y = Math.random()*150;
-<<<<<<< HEAD
         let x = Math.random()*3+1;
         posb.x = (posa.x+posd.x)*(1/3);
         posb.y = (posa.y+posd.y)*(1/3);
@@ -149,9 +140,5 @@ export default class NewClass extends cc.Component {
                 }
             }
         }
-=======
-        this.squareBezier(posa,posb,posc,posd);
->>>>>>> 5cd1ff3632679380d8f3dfd1d3443b9fb9d315f0
->>>>>>> a6ef5893fbba5eac7e2ba648983911b603d675b0
     }
 }
