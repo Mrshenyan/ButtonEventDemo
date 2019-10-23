@@ -21,6 +21,13 @@ export default class NewClass extends cc.Component {
     C:cc.Button=null;
     @property(cc.Sprite)
     aims:cc.Sprite=null;
+    @property({
+        default: 0,
+        displayName:"Score",
+        tooltip:"the Score",
+
+    })
+    score:number=0;
     // onLoad () {}
 
     start () {

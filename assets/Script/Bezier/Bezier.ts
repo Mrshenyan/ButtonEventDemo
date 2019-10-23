@@ -69,7 +69,7 @@ export default class NewClass extends cc.Component {
             let node = new cc.Node();
             let pos:cc.Vec2=new cc.Vec2();
             // pos.x = pos1.x*Math.pow((1-t),2)+2*t*(1-t)*pos2.x+pos3.x*Math.pow(t,2);
-            // pos.y = pos1.y*Math.pow((1-t),2)+2*t*(1-t)*pos2.y+pos3.y*Math.pow(t,2);
+            // pos.y = pos1.y*Math.pow((1-t),2)+2*t*(1-t)*pos2.y+pos3.y*Math.pow(t,2); 
             pos.x = (pos1.x*Math.pow((1-t),3)+3*t*Math.pow((1-t),2)*pos2.x+3*pos3.x*Math.pow(t,2)*(1-t)+pos4.x*Math.pow(t,3));
             pos.y = (pos1.y*Math.pow((1-t),3)+3*t*Math.pow((1-t),2)*pos2.y+3*pos3.y*Math.pow(t,2)*(1-t)+pos4.y*Math.pow(t,3));
             node.x = pos.x;

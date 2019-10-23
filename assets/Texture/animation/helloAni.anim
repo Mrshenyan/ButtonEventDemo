@@ -20,6 +20,27 @@
         }
       ],
       "y": []
+    },
+    "paths": {
+      "HelloWorld": {
+        "props": {
+          "x": []
+        }
+      },
+      "HelloWorld/New Node": {
+        "props": {
+          "x": [
+            {
+              "frame": 0,
+              "value": 0
+            },
+            {
+              "frame": 0.25,
+              "value": 353
+            }
+          ]
+        }
+      }
     }
   },
   "events": [
