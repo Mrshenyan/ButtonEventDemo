@@ -76,3 +76,5 @@ assets/Texture/GTH/Gth.fire
 assets/Texture/GTH/Gth.anim.meta
 assets/Texture/GTH/Gth.anim
 assets/Texture/GTH.meta
+*.meta
+*.meta
