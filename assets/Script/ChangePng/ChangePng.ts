@@ -22,7 +22,6 @@ export default class NewClass extends cc.Component {
     @property(cc.Sprite)
     aims:cc.Sprite=null;
     @property({
-        default: 0,
         displayName:"Score",
         tooltip:"the Score",
 

@@ -1,13 +1,13 @@
 {
   "android-instant": {
-    "REMOTE_SERVER_ROOT": "",
+    "REMOTE_SERVER_ROOT": "http://192.168.56.1:7456/preview-android-instant/",
     "host": "",
     "pathPattern": "",
     "recordPath": "",
     "scheme": "https",
     "skipRecord": false
   },
-  "appBundle": false,
+  "appBundle": true,
   "baidugame": {
     "REMOTE_SERVER_ROOT": "",
     "appid": "testappid",
